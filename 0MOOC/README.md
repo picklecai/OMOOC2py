@@ -4,4 +4,5 @@
 ## 进展
 
 - 150924 大妈创建
-- 151016 [DISQUS教程](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/DISQUS.md)
+- 151016 [DISQUS教程](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/DISQUS.md)  
+- 151017 [151015大妈讲课笔记](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/note.md)  
