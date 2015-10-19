@@ -1,4 +1,4 @@
-此处记录常见Python术语  
+此处记录常见Python术语，源自Learn Python The Hard Way中总结。  
 # 一、函数
 ## 1. 系统函数
 ### print
