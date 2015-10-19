@@ -21,26 +21,33 @@ from py文件名 import \*，可以让导入的py文件名不需要再出现在�
 open(文件名，其他参数)，其他参数有'w'、'r'等。
 
 ### close()
-变量名.close()  #变量名是open的返回，文件对象。
+变量名.close()    
+注释：#变量名是open的返回，文件对象。
 
 ### read()
-1. 变量名.read()  #变量名是open的返回，文件对象。
-2. 变量名.readline()  #变量名是open的返回，文件对象。
+1. 变量名.read()    
+注释：#变量名是open的返回，文件对象。
+2. 变量名.readline()  
+注释：#变量名是open的返回，文件对象。
 
 ### write()
-变量名.write(写入内容)  #变量名是open的返回，文件对象。写入内容用+连接。
+变量名.write(写入内容)  
+注释：#变量名是open的返回，文件对象。写入内容用+连接。
 
 ### truncate()
-变量名.truncate()   #变量名是open的返回，文件对象。
+变量名.truncate()  
+注释：#变量名是open的返回，文件对象。
 
 ### len()
-len(参数) #参数是read（）的返回结果
+len(参数)   
+注释：#参数是read（）的返回结果
 
 ### exists()
 exists(文件名)
 
 ### seek()
-变量名.seek(0)  #变量名是open的返回，文件对象。回到开头
+变量名.seek(0)    
+注释：#变量名是open的返回，文件对象。回到开头
 
 ### help()
 import后可以help。
