@@ -1,6 +1,7 @@
 # _*_ coding:utf-8 _*_
 
 from os.path import exists
+import time
 
 # 打印之前所有的内容
 if exists("tempfile.txt"):
@@ -17,6 +18,7 @@ if exists("tempfile.txt"):
 # 输入新的内容
 txt = open("tempfile.txt", 'a')
 newline = raw_input("请给记事本输入新内容： ")
+txt.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n"))
 txt.write(newline)
 txt.write("\n")
 txt.close()
@@ -24,6 +26,8 @@ txt.close()
 # 新内容另存为文件
 filename = raw_input("新内容的文件名是：")
 output = open(filename + ".txt", 'w')
+output.write(filename + ".txt"+"\n")
+output.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n"))
 output.write(newline)
 output = open(filename + ".txt")
 output.close
