@@ -56,7 +56,6 @@ def writenew():
 		choose = raw_input(prompt)
 
 		if choose =="1" :
-			# 新内容另存为文件
 			filename = raw_input("存储今日记录，请输入文件名：")
 			output = open(filename + ".txt", 'w') #规定好扩展名，以免出现用户保存的文件打不开的情况。
 			output.write(filename + ".txt"+"\n") #在文件中写入文件名。
@@ -71,7 +70,7 @@ def writenew():
 			print "对不起，我不知道你想要干什么。请重新选择是否要存盘。"
 			savenew()
 
-	# 新文件存盘
+	# 新内容另存为文件
 	savenew()
 
 if __name__ == '__main__':
