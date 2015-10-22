@@ -66,7 +66,10 @@ print "And finally, we close it."
 target.close()
 </pre></code>
 
-为什么将truncate注释之后还是会清空文件呢？
+为什么将truncate注释之后还是会清空文件呢？  
+
+### Answer：
+15.10.21 'w'会清空，'a'则不会。
 
 ## Q4: 
 (ex17)  
