@@ -37,6 +37,9 @@ def printhistory():
 		for i in notelist:
 			print(i)
 		print "-------------------------------------------"
+	else:
+		print "对不起，程序第一次运行，尚无历史记录可打印。你可以选择2开始输入新内容。"
+		main()
 
 def writenew():
 	# 输入新的内容
