@@ -47,27 +47,32 @@ def writenew():
 	txt.write("\n"+"\n")
 	txt.close()
 
-	print '''
+	def savenew():
+		print '''
 你是否想把新输入内容存为独立文件？ 
 1 好的，存为独立文件。 
 2 不想，只是随便写写。	'''
-	prompt = '>'
-	choose = raw_input(prompt)
+		prompt = '>'
+		choose = raw_input(prompt)
 
-	if choose =="1" :
-		# 新内容另存为文件
-		filename = raw_input("存储今日记录，请输入文件名：")
-		output = open(filename + ".txt", 'w') #规定好扩展名，以免出现用户保存的文件打不开的情况。
-		output.write(filename + ".txt"+"\n") #在文件中写入文件名。
-		output.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n")) #在文件中写入当前时间。
-		output.write(newline)
-		output = open(filename + ".txt")
-		output.close
-		main()
-	elif choose =="2" :
-		main()
-	elif choose =="3" :
-		exit(0)
+		if choose =="1" :
+			# 新内容另存为文件
+			filename = raw_input("存储今日记录，请输入文件名：")
+			output = open(filename + ".txt", 'w') #规定好扩展名，以免出现用户保存的文件打不开的情况。
+			output.write(filename + ".txt"+"\n") #在文件中写入文件名。
+			output.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n")) #在文件中写入当前时间。
+			output.write(newline)
+			output = open(filename + ".txt")
+			output.close
+			main()
+		elif choose =="2" :
+			main()
+		else:
+			print "对不起，我不知道你想要干什么。请重新选择是否要存盘。"
+			savenew()
+
+	# 新文件存盘
+	savenew()
 
 if __name__ == '__main__':
 	main()
