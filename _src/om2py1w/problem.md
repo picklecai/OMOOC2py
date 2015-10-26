@@ -8,3 +8,23 @@
 
 ##2. Tk窗口不出现  
 末尾加了xx.mainloop()就可以在powershell中出现窗口了。  
+
+##3. unexpected indent  
+如果空格为三个，则出现。问题是：提示并没有出现在出现问题的那一行。试了好几次才发现。
+<pre><code>
+def main():
+  ''' win = Tk()
+    win.title = ('Picklecai notebook' )
+    win.geography =('400x600') '''
+    print '''
+请输入你的选择：
+1 打印之前的历史记录
+2 输入新的内容
+3 退出程序 '''
+	
+   ''' l = Label(win, text = chooselabel)
+    l.pack()'''
+
+</pre></code>
+
+对于以上代码，提示说是在print'''这一行，其实问题出在'''win。可能是因为那一行是注释？所以不提示然而不予通过？修改了win这一行后，马上提示到了'''l这一行。
