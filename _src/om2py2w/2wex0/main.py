@@ -44,30 +44,30 @@ def writenew():
     prompt = "今日记录，请输入： "
     l3 = Tkinter.Label(win, text=prompt)
     l3.grid(row=1, column=2)
+    global newline
     newline = Tkinter.Entry(win)
     newline.grid(row=2, column=2)
-
-    def savenew():
-        # 保存
-        fn = Tkinter.Entry(win)
-        fn.grid(row=4, column=2)
-        fn.bind('<Key-Return>', fuzhi)
-        filename = fuzhi(fn)
-        output = open(filename + ".txt", 'w')  # 规定好扩展名，以免出现用户保存的文件打不开的情况。
-        output.write(filename + ".txt"+"\n")  # 在文件中写入文件名。
-        output.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n"))  # 写入当前时间。
-        output.write(newline.get().encode("utf-8"))  # 可以输入汉字
-        output = open(filename + ".txt")
-        output.close
-        # 暂存
-        txt = open("tempfile.txt", 'a')
-        txt.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n"))  # 在保存当前输入时，也保存当前时间。
-        txt.write(newline.get().encode("utf-8"))  # 可以输入汉字
-        txt.write("\n"+"\n")
-        txt.close()
-
     b4 = Tkinter.Button(win, text="保存新内容", command=savenew)
     b4.grid(row=3, column=2)
+
+def savenew():
+    # 保存
+    fn = Tkinter.Entry(win)
+    fn.grid(row=4, column=2)
+    fn.bind('<Key-Return>', fuzhi)
+    filename = fuzhi(fn)
+    output = open(filename + ".txt", 'w')  # 规定好扩展名，以免出现用户保存的文件打不开的情况。
+    output.write(filename + ".txt"+"\n")  # 在文件中写入文件名。
+    output.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n"))  # 写入当前时间。
+    output.write(newline.get().encode("utf-8"))  # 可以输入汉字
+    output = open(filename + ".txt")
+    output.close
+    # 暂存
+    txt = open("tempfile.txt", 'a')
+    txt.write(time.strftime("%d/%m/%Y %H:%M:%S"+"\n"))  # 在保存当前输入时，也保存当前时间。
+    txt.write(newline.get().encode("utf-8"))  # 可以输入汉字
+    txt.write("\n"+"\n")
+    txt.close()
 
 def fuzhi(e):
     e = Tkinter.Entry(win)
