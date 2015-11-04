@@ -30,6 +30,7 @@ def printhistory():
     if exists("tempfile.txt"): 
     	txt = open("tempfile.txt")
         notelist = txt.readlines()
+        print "历史记录：" + "\n"
         for i in notelist:
             print(i)
 
