@@ -3,8 +3,8 @@
 
 from socket import *
 import time
-import notebooknets
 from sys import exit
+import notebooknets
 
 def main():
     BUF_SIZE = 65565
