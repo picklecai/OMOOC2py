@@ -13,7 +13,7 @@ def main():
     notebooknets.printhistory()
     while True:
         global data
-        data = raw_input('Please Input data>')
+        data = raw_input('今日记录，请输入（输入'quit'退出程序）：')
         if data == 'quit':
             exit(0)
         else:
