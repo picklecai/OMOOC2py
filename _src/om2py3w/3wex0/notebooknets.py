@@ -1,4 +1,6 @@
 # _*_coding:utf-8_*_
+# 服务器端程序
+
 from socket import *
 import time
 from os.path import exists
