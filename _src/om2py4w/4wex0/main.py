@@ -6,9 +6,10 @@ from bottle import *
 def hello():
 	return "hello\n\n"
 
-@route('/inputwin/<name>')
-def inputwin(name):
-	return "Please input: %s" % name
+@route('/about/<name>')
+def aboutme(name):
+	return "The page is about: %s" % name
 
 if __name__ == '__main__':
-    run(host="localhost", port=8800)
+	debug(True)
+    run(host="localhost", port=8800, reloader=True) 
