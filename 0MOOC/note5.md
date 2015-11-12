@@ -22,7 +22,7 @@ BaaS
 盯着一招练：去吧  
 入门：没有门  
 笨功夫  
-Google，用py写的。 
+Google，用py写的。 The zen of python 
 
 
 ## 印象最深  
