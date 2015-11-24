@@ -11,3 +11,8 @@
 > Unix timestamp：是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。  
 
 怪不得网站上很多时间不对的地方经常显示为“1970年1月1日”，原来是这种归零。  
+
+将unix时间戳还原为正常时间的代码：  
+    time.localtime(unixtimevalue)  
+
+![](http://i12.tietuku.com/b25e3d80a2bbc91e.png)
