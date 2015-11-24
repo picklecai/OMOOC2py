@@ -39,7 +39,8 @@
 ## 11.24补充  
 错误提示：  
 > Your book’s latest update failed to build.  
-> 查看细节：  
+
+查看细节：  
 > ![](http://i12.tietuku.com/9b684c337a282321.png)
 > ![](http://i12.tietuku.com/97505e458536ab4d.png)
 
