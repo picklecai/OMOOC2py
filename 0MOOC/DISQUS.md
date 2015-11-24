@@ -66,6 +66,7 @@ shortName并未缺少。
 2. 验证成功后，可以发评论了。 红色警告的错误提示并未消失。点击“restart this build”继续错误。   
 3. 研究book.json里的shortName写法，重新粘贴大妈的原始内容（替换为picklecai）。错误不变。  
 4. 查看`https://github.com/GitbookIO/plugin-disqus` 和`https://plugins.gitbook.com/plugin/disqus`的内容，最后发现其中代码在`"pluginsConfig":`后还嵌入一层disqus。修改book.json如下：  
+<pre><code>
     {"title": "开智学院 编程课程 Python 入门班 私人教程模板",
     "version": "15.9.18,2020",
     "description": "OMOOC.py tutorial for teching",
@@ -78,7 +79,7 @@ shortName并未缺少。
         }
      }
     }
-
+</pre></code>
 到gitbook刷新，这个update未出现红色。其他仍然红色。  
 restart其他，错误如故。  
 想着可能这一层`"disqus"`并不重要，所以没有解决问题。  
