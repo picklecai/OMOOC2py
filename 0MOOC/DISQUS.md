@@ -48,6 +48,7 @@
 > > Error: Configuration Error: pluginsConfig.disqus.shortName is required  
 
 book.json内容：  
+<pre><code>
     {"title": "开智学院 编程课程 Python 入门班 私人教程模板",
     "version": "15.9.18,2020",
     "description": "OMOOC.py tutorial for teching",
@@ -59,6 +60,7 @@ book.json内容：
 
      }
     }
+</pre></code>  
 
 shortName并未缺少。
 
