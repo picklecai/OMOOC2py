@@ -64,8 +64,11 @@ book.json内容：
 
 shortName并未缺少。
 
+尝试一：检查disqus帐号：  
 1. 到disqus.com上检查帐号picklecai，提示邮箱未验证。试着在联合早报某新闻下发评论，未验证邮箱无法发评论。发验证邮件，发了好几次，最后统一在垃圾箱找到（垃圾箱无未读提示），邮箱为163邮箱。  
 2. 验证成功后，可以发评论了。 红色警告的错误提示并未消失。点击“restart this build”继续错误。   
+
+尝试二： 研究book.json里的shortName：  
 3. 研究book.json里的shortName写法，重新粘贴大妈的原始内容（替换为picklecai）。错误不变。  
 4. 查看`https://github.com/GitbookIO/plugin-disqus` 和`https://plugins.gitbook.com/plugin/disqus`的内容，最后发现其中代码在`"pluginsConfig":`后还嵌入一层disqus。修改book.json如下：  
 <pre><code>
