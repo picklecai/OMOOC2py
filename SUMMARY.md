@@ -14,6 +14,7 @@
        * [DISQUS]((0MOOC/DISQUS.md)
        * [Sublime]((0MOOC/sublimeplugin.md)
        * [exe可执行文件]((0MOOC/exe.md)
+       * [pydoc](0MOOC/pydoc.md)
 * [基础旋进](1sTry/README.md)
 * [迭代作品](2nDev/README.md)
 * [人生首秀](3rDemo/README.md)
