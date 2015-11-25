@@ -3,8 +3,16 @@
 
 ## 进展
 
-- 150924 大妈创建
-- 151016 0wd5 [DISQUS教程](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/DISQUS.md)  
-- 151017 0wd6 [151015大妈讲课笔记](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/note.md) 
-- 151017 0wd6 [github邮箱设置为公开](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/git.md)
-- 151019 1w1d [Sublime安装支持Python的插件](https://github.com/picklecai/OMOOC2py/blob/master/0MOOC/sublimeplugin.md)
+* 笔记
+   * [1w笔记](0MOOC/note1.md)
+   * [2w笔记](0MOOC/note2.md)
+   * [3w笔记](0MOOC/note3.md)
+   * [4w笔记](0MOOC/note4.md)
+   * [5w笔记](0MOOC/note5.md)
+   * [6w笔记](0MOOC/note6.md)
+* 环境或工具
+   * [git&github](0MOOC/git.md)
+   * [DISQUS](0MOOC/DISQUS.md)
+   * [Sublime](0MOOC/sublimeplugin.md)
+   * [exe可执行文件](0MOOC/exe.md)
+   * [pydoc](0MOOC/pydoc.md)
