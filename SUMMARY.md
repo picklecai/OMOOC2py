@@ -18,7 +18,7 @@
 * [基础旋进](1sTry/README.md)
    * 笨办法学python
        * [python术语](1sTry/Term4Py.md)
-       * [问题](1sTry/Q4HardwayPy.md)
+       * [笨办法中的问题](1sTry/Q4HardwayPy.md)
 * [迭代作品](2nDev/README.md)
 * [人生首秀](3rDemo/README.md)
 * [代码 (_src)](_src/README.md)
