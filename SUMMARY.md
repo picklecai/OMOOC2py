@@ -9,7 +9,7 @@
        * [4w笔记](0MOOC/note4.md)
        * [5w笔记](0MOOC/note5.md)
        * [6w笔记](0MOOC/note6.md)
-   * 教程
+   * 环境或工具
        * 
 * [基础旋进](1sTry/README.md)
 * [迭代作品](2nDev/README.md)
