@@ -20,6 +20,7 @@
        * [python术语](1sTry/Term4Py.md)
        * [笨办法中的问题](1sTry/Q4HardwayPy.md)
    * From10.10
+       * [图形界面开发感悟](1sTry/GUIkeypoint.md)
        * [import自己的程序](1sTry/importmycode.md)
        * [sae教程](1sTry/sae.md)
        * [Unix时间戳](1sTry/unixtime.md)
