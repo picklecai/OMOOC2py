@@ -3,7 +3,12 @@
 
 ## 进展
 
-- 150924 大妈创建
-- 151019 1w1d [Questions for Learn Python The Hard Way](https://github.com/picklecai/OMOOC2py/blob/master/1sTry/Q4HardwayPy.md)
-- 151019 1w1d [Python常见术语](https://github.com/picklecai/OMOOC2py/blob/master/1sTry/Term4Py.md)
-- 151020 1w2d [查看pydoc文档](https://github.com/picklecai/OMOOC2py/blob/master/1sTry/pydoc.md)
+* 笨办法学python
+    * [python术语](Term4Py.md)
+    * [笨办法中的问题](Q4HardwayPy.md)
+* From10.10
+    * [图形界面开发感悟](GUIkeypoint.md)
+    * [import自己的程序](importmycode.md)
+    * [sae教程](sae.md)
+    * [jinja2教程](jinja.md)
+    * [Unix时间戳](unixtime.md)
