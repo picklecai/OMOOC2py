@@ -10,6 +10,7 @@
    * [1w 记事本v1.0：单机命令行版](_src/om2py0w/0wex1/README.md)
    * [2w Tinker程序试作]((_src/om2py1w/README.md)
    * [2w 记事本v2.0：单机图形界面版](_src/om2py2w/2wex0/README.md)
+   * [3w 记事本v3.0：内网命令行版](_src/om2py3w/3wex0/README.md)
 * [有关](ABOUT.md)
 * [素材 (draft)](draft/README.md)
    * [教程该怎么写](draft/how2tutorial.md)
