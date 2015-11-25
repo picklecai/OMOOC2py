@@ -12,6 +12,7 @@
    * 环境或工具
        * [git&github]((0MOOC/git.md)
        * [DISQUS]((0MOOC/DISQUS.md)
+       * [Sublime]((0MOOC/sublimeplugin.md)
 * [基础旋进](1sTry/README.md)
 * [迭代作品](2nDev/README.md)
 * [人生首秀](3rDemo/README.md)
