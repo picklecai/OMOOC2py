@@ -8,7 +8,9 @@ Jinja2是基于python的模板引擎。基于unicode并能在python2.4之后的�
 1. 安装 easy_install  
 地址：https://pypi.python.org/pypi/setuptools  
 在windowspowshell3版本下（win8可以），输入命令：  
+<pre><code>
     (Invoke-WebRequest https://bootstrap.pypa.io/ez_setup.py).Content | python -  
+</pre></code>
 注意python和短横线之间有个空格，否则要提示python-不存在。  
 
 2. 安装jinja  
