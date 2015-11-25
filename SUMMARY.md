@@ -8,6 +8,7 @@
 * [代码 (_src)](_src/README.md)
    * [0w 42行代码](_src/om2py0w/0wex0/main.py)
    * [1w 记事本v1.0：单机命令行版](_src/om2py0w/0wex1/README.md)
+   * [2w Tinker程序试作]((_src/om2py1w/README.md)
 * [有关](ABOUT.md)
 * [素材 (draft)](draft/README.md)
    * [教程该怎么写](draft/how2tutorial.md)
