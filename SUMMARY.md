@@ -21,6 +21,7 @@
        * [笨办法中的问题](1sTry/Q4HardwayPy.md)
    * From10.10
        * [import自己的程序](1sTry/importmycode.md)
+       * [sae教程](1sTry/sae.md)
 * [迭代作品](2nDev/README.md)
 * [人生首秀](3rDemo/README.md)
 * [代码 (_src)](_src/README.md)
