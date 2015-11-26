@@ -25,6 +25,7 @@
        * [sae教程](1sTry/sae.md)
        * [jinja2教程](1sTry/jinja.md)
        * [Unix时间戳](1sTry/unixtime.md)
+       * [微信及xml学习记录](1sTry/wechat+xml.md)
 * [迭代作品](2nDev/README.md)
 * [人生首秀](3rDemo/README.md)
 * [代码 (_src)](_src/README.md)

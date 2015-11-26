@@ -12,3 +12,4 @@
     * [sae教程](sae.md)
     * [jinja2教程](jinja.md)
     * [Unix时间戳](unixtime.md)
+    * [微信及xml学习记录](wechat+xml.md)
