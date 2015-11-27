@@ -10,7 +10,7 @@
        * [5w笔记](0MOOC/note5.md)
        * [6w笔记](0MOOC/note6.md)
        * [7w笔记](0MOOC/note7.md) 
-   * [环境或工具](0MOOCTOOLREADME.md)
+   * [环境或工具](0MOOC/TOOLREADME.md)
        * [Git&Github](0MOOC/git.md)
        * [GitBook](0MOOC/GitBook.md)
        * [DISQUS](0MOOC/DISQUS.md)
