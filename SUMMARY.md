@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [教学反转](0MOOC/README.md)
-   * [笔记]((0MOOC/NOTEREADME.md)
+   * [笔记](0MOOC/NOTEREADME.md)
        * [1w笔记](0MOOC/note1.md)
        * [2w笔记](0MOOC/note2.md)
        * [3w笔记](0MOOC/note3.md)
@@ -10,7 +10,7 @@
        * [5w笔记](0MOOC/note5.md)
        * [6w笔记](0MOOC/note6.md)
        * [7w笔记](0MOOC/note7.md) 
-   * [环境或工具]((0MOOCTOOLREADME.md)
+   * [环境或工具](0MOOCTOOLREADME.md)
        * [Git&Github](0MOOC/git.md)
        * [GitBook](0MOOC/GitBook.md)
        * [DISQUS](0MOOC/DISQUS.md)
