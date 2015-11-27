@@ -9,6 +9,7 @@
        * [4w笔记](0MOOC/note4.md)
        * [5w笔记](0MOOC/note5.md)
        * [6w笔记](0MOOC/note6.md)
+       * [7w笔记](0MOOC/note7.md) 
    * 环境或工具
        * [Git&Github](0MOOC/git.md)
        * [GitBook](0MOOC/GitBook.md)
