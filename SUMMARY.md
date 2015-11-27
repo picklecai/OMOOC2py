@@ -17,6 +17,7 @@
        * [Sublime](0MOOC/sublimeplugin.md)
        * [exe可执行文件](0MOOC/exe.md)
        * [pydoc](0MOOC/pydoc.md)
+       * [QPython](0MOOC/QPython.md) 
 * [基础旋进](1sTry/README.md)
    * 笨办法学python
        * [python术语](1sTry/Term4Py.md)

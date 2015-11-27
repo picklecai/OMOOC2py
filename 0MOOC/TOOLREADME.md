@@ -11,3 +11,4 @@
    * [Sublime](sublimeplugin.md)
    * [exe可执行文件](exe.md)
    * [pydoc](pydoc.md)
+   * [QPython](QPython.md) 
