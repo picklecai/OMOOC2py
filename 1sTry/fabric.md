@@ -26,5 +26,28 @@ win8
 
 ## 使用
 
+fabric安装好了之后，要使用fab命令，需要把代码放入当前文件夹的根目录，并起名为fabfile.py。  
+
+例如：   
+
+1. 进入当前文件夹`I:py`，在命令行运行python。 
+2. 建立fabfile.py文件。代码见后文。  
+3. 在命令行运行`fab 函数名`。  
+
+代码如下：  
+
+    def hello():
+		print("Hello world!")
+
+运行情况：  
+
+![](http://i5.tietuku.com/a084dfc5f83854d1.png)  
+
+
+一开始的错误使用方式：  
+
+![](http://i5.tietuku.com/16ea5212ad5412c7.png)
+
+
 ## 体验
 
