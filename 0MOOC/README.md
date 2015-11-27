@@ -4,17 +4,12 @@
 ## 进展
 
 * [笔记](NOTEREADME.md)
-   * [1w笔记](note1.md)
-   * [2w笔记](note2.md)
-   * [3w笔记](note3.md)
-   * [4w笔记](note4.md)
-   * [5w笔记](note5.md)
-   * [6w笔记](note6.md)
-   * [7w笔记](note7.md) 
+
 * [环境或工具](TOOLREADME.md)
-   * [git&github](git.md)
-   * [GitBook](GitBook.md)
-   * [DISQUS](DISQUS.md)
-   * [Sublime](sublimeplugin.md)
-   * [exe可执行文件](exe.md)
-   * [pydoc](pydoc.md)
+
+
+## 参考
+
+- [如何成为一名专家级的程序员 - 资讯/生活 - 极思维](http://www.topthink.com/topic/9863.html)
+- [最好的学习方法，就是教别人,嘉力丰大课堂,人才中心,GAREFU嘉力丰](http://www.garefu.com/Talent_view.asp?id=146)
+- [4种方法来成为一名作家](http://zh.wikihow.com/%E6%88%90%E4%B8%BA%E4%B8%80%E5%90%8D%E4%BD%9C%E5%AE%B6)
