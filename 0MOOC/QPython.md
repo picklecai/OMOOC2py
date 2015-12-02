@@ -43,6 +43,8 @@ win8
 
 开发者在视频中，使用了推送到手机的功能。但他又说自己用的虚拟机。根据前面描述，他可能用了qedit4web程序。  
 
+发现river的一篇文章：[如何使用QPython开发Android应用 |QPython |Python for Android](http://codelab.qpython.org/qpythoncodelab/1st-qpython-app-for-android.html)
+
 ## 配置
 
 ## 使用
