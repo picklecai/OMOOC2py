@@ -11,7 +11,7 @@
        * [6w笔记](0MOOC/note6.md)
        * [7w笔记](0MOOC/note7.md) 
    * [环境或工具](0MOOC/TOOLREADME.md)
-       * [Git&Github](0MOOC/git.md)
+       * [Git&Github](0MOOC/github.md)
        * [GitBook](0MOOC/GitBook.md)
        * [DISQUS](0MOOC/DISQUS.md)
        * [Sublime](0MOOC/sublimeplugin.md)
