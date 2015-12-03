@@ -6,7 +6,7 @@ jeremiazhang：不纠结。
 
 ## fabric  
 关键词：DSL，本地，远程，批量，分组  
-具体用处：  
+具体用处：自动运行，可用于自动测试，批量测试等。  
 
 ## QPy  
 关键词：SL4A，QPyPi，.apk  
