@@ -78,3 +78,8 @@ win8
 	>>> conn.close()
 
 以上代码在命令行中试运行，感悟：具体查询语句还是SQL语句，看着很熟悉。  
+
+参考资料：  
+
+ - [SQLite 数据库 - 《从零开始学 Python》(第二版) - 极客学院Wiki](http://wiki.jikexueyuan.com/project/start-learning-python/233.html)  
+ - [使用SQLite - 廖雪峰的官方网站](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000)
