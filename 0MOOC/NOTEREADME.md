@@ -12,3 +12,4 @@
    * [5w笔记](note5.md)
    * [6w笔记](note6.md)
    * [7w笔记](note7.md) 
+   * [8w笔记](note8.md) 
