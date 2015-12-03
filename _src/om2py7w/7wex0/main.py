@@ -3,8 +3,16 @@
 #qpy:fullscreen
 #qpy://localhost:8800
 
-from bottle import *
+"""
+简易笔记本app
+@Author Picklecai
+"""
 
+from bottle import *
+import os
+import sqlite3
+
+ASSETS = "/assets/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 class MyWSGIRefServer(ServerAdapter):
@@ -28,7 +36,6 @@ class MyWSGIRefServer(ServerAdapter):
         print "# QWEBAPPEND"
 
 
-
 def __exit():
 	global server
 	server.stop()
@@ -36,22 +43,41 @@ def __exit():
 def __ping():
 	return "OK"
 
+def server_static(filepath):
+    return static_file(filepath, root=ROOT+'/assets')
+
 def home():
 	return template(ROOT+'/index.html')
 
-def main():
-    BUF_SIZE = 65565
-    ss = socket(AF_INET, SOCK_DGRAM)
-    ss_addr = ('127.0.0.1', 8800)
-    ss.bind(ss_addr)
-    while True:
-        print "waiting for data"
-        data, cs = ss.recvfrom(BUF_SIZE)
-        print 'Connected by', cs, 'Receive Data: ', data, 'at: ', time.strftime("%d/%m/%Y %H:%M:%S"+"\n")
-        ss.sendto(data, cs)
-    history(data)
-    ss.close   
+def save(newline):
+    if not exists("noterecord.db"):
+        conn = sqlite3.connect('noterecord.db')
+        cursor = conn.cursor()
+        cursor.execute('create table record (id int(4) primary key, time integer(13), record varchar)')
+        id = 1
+    else:
+        id = id + 1
+    cursor.execute('insert into record (id, time, record) values (\'id\', time.strftime("%d/%m/%Y %H:%M:%S"), \'newline\')')
+    cursor.close()
+    conn.commit()
+    conn.close()
 
+def printhistory():
+    if exists("noterecord.db"): 
+        conn = sqlite3.connect('noterecord.db')
+        cursor = conn.cursor()
+        cursor.execute('select * from record')
+        print cursor.fetchall()
+
+@route('/history')
+def printh():
+    if exists("tempfile.txt"): 
+        txt = open("tempfile.txt")
+        notelist = txt.readlines()
+        return '''
+    <form action="/index" method="POST">
+    The history records
+    <br/>''' + "".join(notelist)
 
 @get('/index')
 def newline():
@@ -67,7 +93,7 @@ def newline():
     </form>
     '''
 
-@post('/index')
+@post('/index.html')
 def inputnewline():
     newline = request.forms.get('newline')
     if newline:
@@ -79,6 +105,7 @@ app = Bottle()
 app.route('/', method='GET')(home)
 app.route('/__exit', method=['GET','HEAD'])(__exit)
 app.route('/__ping', method=['GET','HEAD'])(__ping)
+app.route('/assets/<filepath:path>', method='GET')(server_static)
 
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
