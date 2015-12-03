@@ -15,3 +15,4 @@
     * [微信及xml学习记录](wechat+xml.md)
     * [Fabric](fabric.md)
     * [Template](template.md)
+    * [sqlite](sqlite.md)
