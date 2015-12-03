@@ -76,3 +76,5 @@ win8
 	[(u'1', u'Michael')]
 	>>> cursor.close()
 	>>> conn.close()
+
+以上代码在命令行中试运行，感悟：具体查询语句还是SQL语句，看着很熟悉。  
