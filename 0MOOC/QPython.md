@@ -45,6 +45,8 @@ win8
 
 发现river的一篇文章：[如何使用QPython开发Android应用 |QPython |Python for Android](http://codelab.qpython.org/qpythoncodelab/1st-qpython-app-for-android.html)
 
+最后发现，直接在电脑端程序中写代码，点击运行，即可查看效果。  
+
 ## 配置
 
 ## 使用
