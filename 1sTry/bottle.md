@@ -88,4 +88,9 @@ route函数在class Bottle下面，函数：
 	    def delete(self, path=None, method='DELETE', **options):
 	        """ Equals :meth:`route` with a ``DELETE`` method parameter. """
 	        return self.route(path, method, **options)
-get是函数，GET是http方法。  
+get是函数，GET是http方法。
+
+教练培炎关于bottle安装与否的解释：  
+
+> python import一个库，必须到一些地方去找这个库，这些地方就是它的搜索路径，之所以可以放在同一个目录，是因为当前目录总是默认的搜索路径之一，默认路径还包括系统的标准库路径，如果有特殊需求，可以对搜索路径进行设置。  
+> 目录什么的，就是个表象，根本的是这个东西能不能被找到，与主程序目录相同只能说是自然且合理的选择。“所以它的搜索过程是先当前工作目录然后才是py程序所在目录？”据我观察，是的，但不排除版本和系统可能有差异。    
