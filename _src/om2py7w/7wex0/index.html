@@ -1,27 +1,152 @@
 <html>
-<head>
-<META http-equiv=Content-Type content=text/html; charset=utf-8>
-<title>notebook</title>
-<style>
-body{font-size:11pt;}
-a{text-decoration:none;}
-</style>
+	<head>
+		<META http-equiv=Content-Type content=text/html; charset=utf-8>
+		<title>notebook</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="stylesheet" href="/assets/css/amazeui.min.css">
+		<style>
+			 .get-title {
+		      font-size: 200%;
+		      border: 2px solid #fff;
+		      padding: 20px;
+		      display: inline-block;
+		    }
+		     .get {
+		      background: #1E5B94;
+		      color: #fff;
+		      text-align: center;
+		      padding: 70px 0;
+		    }
 
-</head>
-<body topmargin=2 leftmargin=2 bgcolor=#ffffff>
-<base target=_blank>
-<!--work by http://www.tool.la !lshdic3.5 html???/body??????,????HTML-->
+		    .get-title {
+		      font-size: 200%;
+		      border: 2px solid #fff;
+		      padding: 20px;
+		      display: inline-block;
+		    }
 
+		    .get-btn {
+		      background: #fff;
+		    }
 
-</body>
-</br></br>
-Please input a new line:
-</br>
-</html><input type=text value="input please" size="" style="" name="newline">
-</br>
-<input type=submit style="" onclick="" name="" value="save">
-</br>
-</br>
-History records:
-</br>
-<label cols="40" rows="8" name="historylabel" style=""></label>
+		    .detail {
+		      background: #fff;
+		    }
+
+		    .detail-h2 {
+		      text-align: center;
+		      font-size: 150%;
+		      margin: 40px 0;
+		    }
+
+		    .detail-h3 {
+		      color: #1f8dd6;
+		    }
+
+		    .detail-p {
+		      color: #7f8c8d;
+		    }
+
+		    .detail-mb {
+		      margin-bottom: 30px;
+		    }
+
+		    .hope {
+		      background: #fff37;
+		      padding: 50px 0;
+		    }
+
+		    .hope-img {
+		      text-align: center;
+		    }
+
+		    .hope-hr {
+		      border-color: #149C88;
+		    }
+
+		    .hope-title {
+		      font-size: 140%;
+		    }
+
+		    .about {
+		      background: #fff;
+		      padding: 40px 0;
+		      color: #7f8c8d;
+		    }
+
+		    .about-color {
+		      color: #34495e;
+		    }
+
+		    .about-title {
+		      font-size: 180%;
+		      padding: 30px 0 50px 0;
+		      text-align: center;
+		    }
+
+		    .footer p {
+		      color: #7f8c8d;
+		      margin: 0;
+		      padding: 15px 0;
+		      text-align: center;
+		      background: #2d3e50;
+		    }
+			
+			.no1{
+			margin:50px;
+			border:0;
+			padding:0;
+			}
+		</style>
+	</head>
+
+	<body topmargin=2 leftmargin=2 bgcolor=#ffffff>
+	<!-- Header -->
+	<header data-am-widget="header" class="am-header am-header-default .am-header-fixed">
+	  <div class="am-header-left am-header-nav">
+	    <a href="#left-link" class="">
+	      <i class="am-header-icon am-icon-home"></i>
+	    </a>
+	  </div>
+	  <h1 class="am-header-title">
+	    <a align="center" class="">欢迎使用！</a>
+	  </h1>
+	  <div class="am-header-right am-header-nav">
+	    <a href="#right-link" class="">
+	      <i class="am-header-icon am-icon-bars"></i>
+	    </a>
+	  </div>
+	</header>
+
+	<div class="get">
+	  <div class="am-g">
+	    <div class="am-u-lg-12">
+	      <h1 class="get-title">简易日记本</h1>
+	    </div>
+	  </div>
+	</div>
+
+	</br>	Please input a new line:	</br>
+	<div align="center" style="width:100%;padding:30px;padding-bottom:80px;">
+		<input type="text" id="newline" class="am-form-field am-round" placeholder="" style="width:40%;float:left;"/>
+	</div>
+	<div align="center">
+		<button type="button" class="am-btn am-btn-primary am-round" onclick="javascript:btnOnclick();"><i class="am-icon-search"></i> 保 存</button>
+	</div>
+
+	</br>	History records:	</br>
+	<label cols="40" rows="8" name="historylabel" style=""></label>
+
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/amazeui.min.js"></script>
+	<script type="text/javascript">
+	function btnOnclick() {
+
+	}
+	</script>
+	</body>
+</html>

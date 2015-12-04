@@ -35,7 +35,6 @@ class MyWSGIRefServer(ServerAdapter):
         self.server.server_close() 
         print "# QWEBAPPEND"
 
-
 def __exit():
 	global server
 	server.stop()
@@ -47,16 +46,14 @@ def server_static(filepath):
     return static_file(filepath, root=ROOT+'/assets')
 
 def home():
-	return template(ROOT+'/index.html')
+    return template(ROOT+'/index.html')
 
 def save(newline):
-    if not exists("noterecord.db"):
-        conn = sqlite3.connect('noterecord.db')
-        cursor = conn.cursor()
-        cursor.execute('create table record (id int(4) primary key, time integer(13), record varchar)')
-        id = 1
-    else:
-        id = id + 1
+    conn = sqlite3.connect('/storage/emulated/0/com.hipipal.qpyplus/project/notebookapp/noterecord.db')
+    cursor = conn.cursor()
+    cursor.execute('create table record (id int(4) primary key, time text, record varchar)')
+    id = 1
+    newline=request.Get['newline']
     cursor.execute('insert into record (id, time, record) values (\'id\', time.strftime("%d/%m/%Y %H:%M:%S"), \'newline\')')
     cursor.close()
     conn.commit()
@@ -67,35 +64,11 @@ def printhistory():
         conn = sqlite3.connect('noterecord.db')
         cursor = conn.cursor()
         cursor.execute('select * from record')
-        print cursor.fetchall()
-
-@route('/history')
-def printh():
-    if exists("tempfile.txt"): 
-        txt = open("tempfile.txt")
-        notelist = txt.readlines()
-        return '''
-    <form action="/index" method="POST">
-    The history records
-    <br/>''' + "".join(notelist)
-
-@get('/index')
-def newline():
-    return '''
-    <form action="/index" method="POST">
-    history
-    <br/>    
-    Please input a new line: 
-    <br/>
-    <input name="newline" type="text"/>
-    <br/>
-    <input value="save" type="submit" />
-    </form>
-    '''
+        return cursor.fetchall()
 
 @post('/index.html')
 def inputnewline():
-    newline = request.forms.get('newline')
+    newline = request.GET('newline')
     if newline:
         save(newline)
         printhistory()
