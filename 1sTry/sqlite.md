@@ -83,3 +83,5 @@ win8
 
  - [SQLite 数据库 - 《从零开始学 Python》(第二版) - 极客学院Wiki](http://wiki.jikexueyuan.com/project/start-learning-python/233.html)  
  - [使用SQLite - 廖雪峰的官方网站](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000)
+ - [用Python进行SQLite数据库操作 - 牛皮糖NewPtone - 博客园](http://www.cnblogs.com/yuxc/archive/2011/08/18/2143606.html)
+ - [SQLite 数据类型 | 菜鸟教程](http://www.runoob.com/sqlite/sqlite-data-types.html)
