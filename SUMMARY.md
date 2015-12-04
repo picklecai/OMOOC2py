@@ -26,6 +26,7 @@
    * From10.10
        * [图形界面开发感悟](1sTry/GUIkeypoint.md)
        * [import自己的程序](1sTry/importmycode.md)
+       * [bottle教程](1sTry/bottle.md)
        * [sae教程](1sTry/sae.md)
        * [jinja2教程](1sTry/jinja.md)
        * [Unix时间戳](1sTry/unixtime.md)
