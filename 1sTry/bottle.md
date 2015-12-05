@@ -6,7 +6,8 @@ win8
 
 ## 安装
 
-下载bottle.py，放在工作目录下。
+下载bottle.py，放在工作目录下。  
+[下载地址](https://pypi.python.org/pypi/bottle/0.12.9)  
 
 ## 配置
 
