@@ -56,7 +56,7 @@ def home():
 
 
 def save(newline):
-    conn = sqlite3.connect('/storage/emulated/0/com.hipipal.qpyplus/project/notebookapp/noterecord.db')
+    conn = sqlite3.connect(ROOT+'noterecord.db')
     cursor = conn.cursor()
     cursor.execute('create table record (time text, record varchar)')
     newline = request.get['newline']
@@ -68,7 +68,7 @@ def save(newline):
 
 @post('/index.html')
 def printhistory():
-    conn = sqlite3.connect('noterecord.db')
+    conn = sqlite3.connect(ROOT+'noterecord.db')
     cursor = conn.cursor()
     cursor.execute('select * from record')
     return cursor.fetchall()
