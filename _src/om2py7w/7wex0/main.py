@@ -78,7 +78,7 @@ def printhistory():
 def inputnewline():
     newline = request.get('newline')
     return '''
-    <button type="button" name="save" class="am-btn am-btn-primary am-round" onclick="save(newline"><i class="am-icon-search"></i> save</button>
+    <button type="button" name="save" class="am-btn am-btn-primary am-round" onclick="save(newline)"><i class="am-icon-search"></i> save</button>
     <label cols="40" rows="8" name="historylabel" style="">printhistory()</label>
     '''
 
