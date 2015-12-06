@@ -58,10 +58,9 @@ def home():
 def save(newline):
     conn = sqlite3.connect('/storage/emulated/0/com.hipipal.qpyplus/project/notebookapp/noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table record (id int(4) primary key, time text, record varchar)')
-    id = 1
+    cursor.execute('create table record (time text, record varchar)')
     newline = request.get['newline']
-    cursor.execute('insert into record (id, time, record) values (\'id\', time.strftime("%d/%m/%Y %H:%M:%S"), \'newline\')')
+    cursor.execute('insert into record (time, record) values (time.strftime("%d/%m/%Y %H:%M:%S"), \'newline\')')
     cursor.close()
     conn.commit()
     conn.close()
