@@ -22,6 +22,8 @@ win8
 
 在命令行下不进入python，直接运行`pip install fabric`，装好了。  
 
+注：在未翻墙的64位win7上上述操作未成功。安装pip及fabric均出现了许多错误提示。最后结果大概是配置不完全，反正fab命令不能用。  
+
 ## 配置
 
 ## 使用
@@ -51,3 +53,20 @@ fabric安装好了之后，要使用fab命令，需要把代码放入当前文�
 
 ## 体验
 
+用它来检验db文件有没有正确写入，很好。  
+代码：  
+
+    # _*_ coding:utf-8 _*_
+
+
+	def dataexam():
+	    import sqlite3
+	    conn = sqlite3.connect('noterecord.db')
+	    cursor = conn.cursor()
+	    cursor.execute('select * from record')
+	    print cursor.fetchall()
+	    cursor.close()
+	    conn.commit()
+	    conn.close()
+
+由于fabric安装的失败，以上代码每运行一次，就要在命令行里输入一次。反观fabric是多么好用，尤其用在测试上。
