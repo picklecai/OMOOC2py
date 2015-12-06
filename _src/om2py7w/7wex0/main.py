@@ -11,10 +11,10 @@
 from bottle import *
 import os
 import sqlite3
+import time
 
 ASSETS = "/assets/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
-
 
 class MyWSGIRefServer(ServerAdapter):
     server = None
@@ -36,58 +36,47 @@ class MyWSGIRefServer(ServerAdapter):
         self.server.server_close()
         print "# QWEBAPPEND"
 
-
 def __exit():
     global server
     server.stop()
 
-
 def __ping():
     return "OK"
-
 
 def server_static(filepath):
     return static_file(filepath, root=ROOT+'/assets')
 
-
-def home():
-    inputnewline()
-    return template(ROOT+'/index.html')
-
-
-def save(newline):
+def inputnewline(data):
     conn = sqlite3.connect(ROOT+'noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table record (time text, record varchar)')
-    newline = request.get['newline']
-    cursor.execute('insert into record (time, record) values (time.strftime("%d/%m/%Y %H:%M:%S"), \'newline\')')
+    cursor.execute('insert into record (time, record) values (?,?)', data)
     cursor.close()
     conn.commit()
     conn.close()
 
-
-@post('/index.html')
 def printhistory():
     conn = sqlite3.connect(ROOT+'noterecord.db')
     cursor = conn.cursor()
     cursor.execute('select * from record')
     return cursor.fetchall()
 
-
-@get('/index.html')
-def inputnewline():
-    newline = request.get('newline')
-    return '''
-    <button type="button" name="save" class="am-btn am-btn-primary am-round" onclick="save(newline)"><i class="am-icon-search"></i> save</button>
-    <label cols="40" rows="8" name="historylabel" style="">printhistory()</label>
-    '''
-
+def home():
+    return template(ROOT+'/index.html')
 
 app = Bottle()
 app.route('/', method='GET')(home)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 app.route('/assets/<filepath:path>', method='GET')(server_static)
+
+@app.route('/index.html', method='POST')
+def save():
+    newline = request.get('newline')
+    nowtime = time.time()
+    return '''
+    <button type="button" name="save" class="am-btn am-btn-primary am-round" onclick="save(newline)"><i class="am-icon-search"></i> save</button>
+    <label cols="40" rows="8" name="historylabel" style="">printhistory()</label>
+    '''
 
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
