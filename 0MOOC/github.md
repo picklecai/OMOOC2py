@@ -41,3 +41,32 @@ win7或win8
 ![](http://7xotr7.com1.z0.glb.clouddn.com/15-12-3/25322908.jpg)
 
 另外，今天才发现，到[OpenMindClub/OMOOC2py](https://github.com/OpenMindClub/OMOOC2py)下去查看issues，可以避免[Dashboard](https://github.com/orgs/OpenMindClub/dashboard)里issue太多，找不到的情况。  
+
+## 3. 将本地文件与远程仓库同步 
+
+本地修改文件提交到远程，就在客户端点击sync就可以了。  
+
+反之呢？昨天在家里更新了文件，今天到公司来，要读取这些更新，已经不能用clone再操作一遍了。  
+
+尝试1：  `git fetch`  
+结果：  
+![](http://7xotr7.com1.z0.glb.clouddn.com/15-12-7/47493354.jpg)  
+
+尝试2：  `git branch`与`git status`  
+![](http://7xotr7.com1.z0.glb.clouddn.com/15-12-7/27667853.jpg)  
+ `git branch`没有什么用，但`git status`给出了提示，应该用`git pull`：   
+
+尝试3： 
+
+    git pull
+
+![](http://7xotr7.com1.z0.glb.clouddn.com/15-12-7/11797356.jpg)  
+
+到本地查看，确实是最新的了：   
+ 
+![](http://7xotr7.com1.z0.glb.clouddn.com/15-12-7/91678068.jpg)  
+
+注意：尽管已经进了子目录，但是`git pull`是把整个repository下的更新都下载了的，这效果和在OMOOC2py根目录下是一样的。  
+
+参考资料：  
+[GitHub超详细图文攻略 - 韩曙亮 の 技术博客 - CSDN.NET](http://blog.csdn.net/shulianghan/article/details/18812279)
