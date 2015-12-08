@@ -4,7 +4,7 @@
 #qpy://localhost:8800
 
 """
-简易笔记本app
+?????app
 @Author Picklecai
 """
 
@@ -43,6 +43,9 @@ def __exit():
 def __ping():
     return "OK"
 
+def server_static(filepath):
+    return static_file(filepath, root=ROOT+'/assets')
+
 def inputnewline(data):
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
@@ -56,25 +59,29 @@ def printhistory():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
     cursor.execute('select * from record')
-    return cursor.fetchall()
+    notelist = cursor.fetchall()
+    return notelist
 
 def home():
     return template(ROOT+'/index.html')
 
 app = Bottle()
 app.route('/', method='GET')(home)
-app.route('/__exit', method=['GET', 'HEAD'])(__exit)
-app.route('/__ping', method=['GET', 'HEAD'])(__ping)
+# app.route('/history', method=['GET']
+# app.route('/__exit', method=['GET', 'HEAD'])(__exit)
+# app.route('/__ping', method=['GET', 'HEAD'])(__ping)
+# app.route('/assets/<filepath:path>', method='GET')(server_static)
 
 @app.route('/index.html', method='POST')
 def save():
     newline = request.forms.get('newline')
-    nowtime = time.time()
-    data = nowtime, newline
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
+    data = nowtime.decode('utf-8'), newline.decode('utf-8')
     inputnewline(data)
-    records = printhistory() 
-    return template(ROOT+'/index.html', historylabel=records)
-
+    notelist1 = printhistory() 
+    historylabel = str(notelist1)
+    return template(ROOT+'/index.html', historylabel) 
+    
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
     app.run(server=server, reloader=False)
