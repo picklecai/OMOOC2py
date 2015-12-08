@@ -35,21 +35,21 @@ def printhistory():
         for i in notelist:
             print(i)
 
-@route('/history')
+@route('/history.html')
 def printh():
     if exists("tempfile.txt"): 
         txt = open("tempfile.txt")
         notelist = txt.readlines()
         return '''
-    <form action="/index" method="POST">
+    <form action="/index.html" method="POST">
     The history records
     <br/>''' + "".join(notelist)
 
-@get('/index')
+@get('/index.html')
 def newline():
     return '''
-    <form action="/index" method="POST">
-    history
+    <form action="/index.html" method="POST">
+    <a href="/history.html">hitory</a>
     <br/>    
     Please input a new line: 
     <br/>
@@ -58,13 +58,24 @@ def newline():
     <input value="save" type="submit" />
     </form>
     '''
-@post('/index')
+@post('/index.html')
 def inputnewline():
     newline = request.forms.get('newline')
     if newline:
         save(newline)
         printhistory()
-        return newline
+        return '''
+    <form action="/index.html" method="POST">
+    <a href="/history.html">hitory</a>
+    <br/>    
+    Please input a new line: 
+    <br/>
+    <input name="newline" type="text"/>
+    <br/>
+    <input value="save" type="submit" />
+    <br/>记录已保存，请至history页面查看。<br/>
+    </form>
+    '''
 
 if __name__ == '__main__':
     debug(True)
