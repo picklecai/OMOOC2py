@@ -13,7 +13,6 @@ import os
 import sqlite3
 import time
 
-ASSETS = "/assets/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 class MyWSGIRefServer(ServerAdapter):
@@ -43,13 +42,10 @@ def __exit():
 def __ping():
     return "OK"
 
-def server_static(filepath):
-    return static_file(filepath, root=ROOT+'/assets')
-
 def inputnewline(data):
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, record varchar)')
+    cursor.execute('create table if not exists record (time text, record text)')
     cursor.execute('insert into record (time, record) values (?,?)', data)
     cursor.close()
     conn.commit()
@@ -58,19 +54,16 @@ def inputnewline(data):
 def printhistory():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
+    cursor.execute('create table if not exists record (time text, record text)')
     cursor.execute('select * from record')
     notelist = cursor.fetchall()
     return notelist
 
-def home():
-    return template(ROOT+'/index.html')
-
 app = Bottle()
-app.route('/', method='GET')(home)
-# app.route('/history', method=['GET']
-# app.route('/__exit', method=['GET', 'HEAD'])(__exit)
-# app.route('/__ping', method=['GET', 'HEAD'])(__ping)
-# app.route('/assets/<filepath:path>', method='GET')(server_static)
+@app.route('/')
+def home():
+    notelist1 = printhistory()
+    return template(ROOT+'/index.html', historylabel=notelist1)
 
 @app.route('/index.html', method='POST')
 def save():
@@ -78,10 +71,12 @@ def save():
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
     data = nowtime.decode('utf-8'), newline.decode('utf-8')
     inputnewline(data)
-    notelist1 = printhistory() 
-    historylabel = str(notelist1)
-    return template(ROOT+'/index.html', historylabel) 
-    
+    notelist1 = printhistory()
+    return template(ROOT+'/index.html', historylabel=notelist1)
+
+app.route('/__exit', method=['GET', 'HEAD'])(__exit)
+app.route('/__ping', method=['GET', 'HEAD'])(__ping)
+
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
     app.run(server=server, reloader=False)

@@ -140,12 +140,14 @@
 		</div>
     </form>
 
+	
+	</br>History records:</br>
+	%for i in historylabel:
 		<div>
-			</br>History records:</br>
-			% for i in historylabel:
-        		{{i[0]}}: {{i[1]}} </br>
-    		% end
-		</div>	
+        	{{i[0]}}
+        	{{i[1]}}
+    	</div>
+    %end		
 
 	</body>
 </html>
