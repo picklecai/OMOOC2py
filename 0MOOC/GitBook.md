@@ -19,6 +19,7 @@ Github帐号已经与Gitbook帐号关联。
 4. 从MY BOOKS中进入该书的details页面，点击右边的settings，先检查GIT URL是否正确（正确形式是：`https://github.com/用户名/新建repository目录名.git`）。  
 5. 如果正确，在右列菜单中点击GitHub菜单，检查GitHub Repository是否填写，如果没有填写，填入相对地址`用户名/新建repository目录名`。  
 6. 注意！每一步更改都记得点击绿色的Save按钮进行保存。没有保存的话，离开当前页面不会有系统提示。  
+7. 最后还可能会让你添加webhook。点击add webhook，则进入github菜单，地址已有，只要点击Add webhook即可。  
 
 附book.json代码：
 
