@@ -1,6 +1,7 @@
 # _*_ coding:utf-8 _*_
-import sqlite3
+# It's no need.
 
+import sqlite3
 
 def main():
     conn = sqlite3.connect('noterecord.db')
