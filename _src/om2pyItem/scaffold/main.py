@@ -74,6 +74,9 @@ def save():
     notelist1 = printhistory()
     return template(ROOT+'/history.html', historylabel=notelist1)
 
+app.route('/history.html', method=['GET', 'HEAD'])
+app.route('/baby.html', method=['GET', 'HEAD'])
+
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 
