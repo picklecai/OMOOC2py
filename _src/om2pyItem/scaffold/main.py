@@ -43,6 +43,13 @@ def __ping():
     return "OK"
 
 def home():
+    return template(ROOT+'/index.html')
+
+app = Bottle()
+app.route('/', method='GET')(home)
+
+@app.route('/index.html', method='GET')
+def inputnewline(data):
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
     data = nowtime.decode('utf-8'), newline.decode('utf-8')
@@ -63,10 +70,8 @@ def history():
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)
 
-app = Bottle()
-app.route('/', method='GET')(home)
-app.route('/history', method=['GET'])(history)
-app.route('/baby', method=['GET'])
+app.route('/history.html', method=['GET'])(history)
+app.route('/baby.html', method=['GET'])
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 
