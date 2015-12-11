@@ -42,7 +42,10 @@ def __exit():
 def __ping():
     return "OK"
 
-def inputnewline(data):
+def home():
+    newline = request.forms.get('newline')
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
+    data = nowtime.decode('utf-8'), newline.decode('utf-8')
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
     cursor.execute('create table if not exists record (time text, record text)')
@@ -50,33 +53,20 @@ def inputnewline(data):
     cursor.close()
     conn.commit()
     conn.close()
+    return template(ROOT+'/index.html')
 
-def printhistory():
+def history():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
     cursor.execute('create table if not exists record (time text, record text)')
     cursor.execute('select * from record')
     notelist = cursor.fetchall()
-    return notelist
+    return template(ROOT+'/history.html', historylabel=notelist)
 
 app = Bottle()
-@app.route('/')
-def home():
-    notelist1 = printhistory()
-    return template(ROOT+'/index.html', historylabel=notelist1)
-
-@app.route('/index.html', method='POST')
-def save():
-    newline = request.forms.get('newline')
-    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    data = nowtime.decode('utf-8'), newline.decode('utf-8')
-    inputnewline(data)
-    notelist1 = printhistory()
-    return template(ROOT+'/history.html', historylabel=notelist1)
-
-app.route('/history.html', method=['GET', 'HEAD'])
-app.route('/baby.html', method=['GET', 'HEAD'])
-
+app.route('/', method='GET')(home)
+app.route('/history', method=['GET'])(history)
+app.route('/baby', method=['GET'])
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 
