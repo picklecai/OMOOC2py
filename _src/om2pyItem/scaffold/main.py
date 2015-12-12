@@ -48,7 +48,6 @@ def home():
 app = Bottle()
 app.route('/', method='GET')(home)
 
-@app.route('/index.html', method='GET')
 def inputnewline(data):
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
@@ -60,6 +59,13 @@ def inputnewline(data):
     cursor.close()
     conn.commit()
     conn.close()
+
+@app.route('/index.html', method='POST')
+def save():
+    newline = request.forms.get('newline')
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
+    data = nowtime.decode('utf-8'), newline.decode('utf-8')
+    inputnewline(data)
     return template(ROOT+'/index.html')
 
 def history():
