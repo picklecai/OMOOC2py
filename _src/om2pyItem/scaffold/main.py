@@ -4,7 +4,7 @@
 #qpy://localhost:8800
 
 """
-?????app
+Babyrecordapp
 @Author Picklecai
 """
 
@@ -76,8 +76,11 @@ def history():
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)
 
+def baby():
+	return template(ROOT+'/baby.html')
+
 app.route('/history.html', method=['GET'])(history)
-app.route('/baby.html', method=['GET'])
+app.route('/baby.html', method=['GET'])(baby)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 

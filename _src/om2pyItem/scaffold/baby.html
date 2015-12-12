@@ -103,7 +103,11 @@
 			}
 
 			.nav{			  
-				background:#a40ff0;
+				background:#85c80f;
+				text-align: center;
+				list-style-type:none;
+				margin:0;
+				padding:0;
 			}
 
 			.nav_li{
@@ -114,11 +118,17 @@
 
 			.nav_li li{ 
 				width:20%;
+				float: left;
 			}
 
 			.nav_li a{ 
-				color:#fff; 
 				font-size:16px;
+				display:block; /* 将链接设为块级元素 */
+				padding:5px 8px; /* 设置内边距 */
+				background:#85c80f; /* 设置背景色 */
+				color:#fff; /* 设置文字颜色 */
+				text-decoration:none; /* 去掉下划线 */
+				border-right:1px solid #fff; /* 在左侧加上分隔线 */
 			}
 
 			.active{ 
@@ -132,10 +142,10 @@
 			.nav_li ul li ul li{
 				background:rgb(164,0,0);
 				color: #FFF; 
-				width: 240px;
+				width: 50px;
 				padding: 0px;
-				height: 45px; 
-				line-height: 45px;
+				height: 20px; 
+				line-height: 20px;
 			}
 
 		</style>
@@ -167,8 +177,8 @@
 	  </div>
 	</div>
 
-	<div class="nav ">
-	    <div class="nav_li br_width">
+	<div class="nav" align="center"  style="width:600px;">
+	    <div class="nav_li" align="center" >
 	      <ul>
 	        <li ><a href="/">开始记录</a></li>
 	        <li><a href="history.html">查看历史</a></li>
@@ -177,6 +187,11 @@
 	      </ul>
 	    </div>
 	  </div>
+
+	  <div>
+	     <p><br><br></p>
+	  </div>
+
 
 	<form action="/index.html" method="POST">
 		</br>Please input baby's info:</br>    
