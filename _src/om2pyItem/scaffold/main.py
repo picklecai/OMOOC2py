@@ -77,7 +77,12 @@ def history():
     return template(ROOT+'/history.html', historylabel=notelist)
 
 def baby():
-	return template(ROOT+'/baby.html')
+    conn = sqlite3.connect(ROOT+'/babyinfo.db')
+    cursor = conn.cursor()
+    cursor.execute('create table if not exists babyinfo (name text, sex text, birthtime text)')
+    cursor.execute('select * from babyinfo')
+    notelist = cursor.fetchall()
+	return template(ROOT+'/baby.html', babylabel=notelist)
 
 app.route('/history.html', method=['GET'])(history)
 app.route('/baby.html', method=['GET'])(baby)

@@ -195,8 +195,8 @@
 
 	<form action="/baby.html" method="POST">
 	    <br />
-		<input type="button" onclick="showAndHidden();" align="left" value="Add a new baby:" /> 
-		<div id="div" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
+		<input type="button" onclick="showAndHidden1();" align="left" value="Add a new baby:" /> 
+		<div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
 	  		<label>Name</label><br />
 	  		<input name="name" type="text" />
 	  		<br /><br />
@@ -268,24 +268,31 @@
 			  <option value ="31">31</option>			  			  			  
 			</select>
 	  		<br /><br />	
-	  		<input value="save" type="submit" />            
+	  		<input type="button" onclick="showAndHidden2();" align="left" value="save" />           
 	    </div>
+	    <div id="div2" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
+	  		<label>Name</label><br />
+	  		{{name}}
+	  		<br /><br />
+	  		<label>Sex</label><br />
+	  		{{sex}}
+	  		<br /><br />		 
+			<label>Birth Time</label><br />
+			{{birthtime}}
+	    </div>			
 		<script type="text/javascript"> 
-			function showAndHidden(){ 
-				var div=document.getElementById("div"); 
-				if(div.style.display=='none') div.style.display='block';  
+			function showAndHidden1(){ 
+				var div1=document.getElementById("div1"); 
+				if(div1.style.display=='none') div1.style.display='block';  
+				} 
+			function showAndHidden2(){ 
+				var div1=document.getElementById("div1"); 
+				if(div1.style.display=='block') div1.style.display='none';  
+				if(div2.style.display=='none') div2.style.display='block'; 
 				} 
 		</script> 
-    </form>
 
-	
-	</br>baby info</br>
-	%for i in historylabel:
-		<div>
-        	{{i[0]}}
-        	{{i[1]}}
-    	</div>
-    %end		
+    </form>	
 
 	</body>
 </html>
