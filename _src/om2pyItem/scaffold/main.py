@@ -82,7 +82,7 @@ def baby():
     cursor.execute('create table if not exists babyinfo (name text, sex text, birthtime text)')
     cursor.execute('select * from babyinfo')
     notelist = cursor.fetchall()
-	return template(ROOT+'/baby.html', babylabel=notelist)
+    return template(ROOT+'/baby.html', babylabel=notelist)
 
 app.route('/history.html', method=['GET'])(history)
 app.route('/baby.html', method=['GET'])(baby)
