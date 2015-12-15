@@ -45,9 +45,6 @@ def __ping():
 def home():
     return template(ROOT+'/index.html')
 
-app = Bottle()
-app.route('/', method='GET')(home)
-
 def inputnewline(data):
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
@@ -60,14 +57,6 @@ def inputnewline(data):
     conn.commit()
     conn.close()
 
-@app.route('/index.html', method='POST')
-def save():
-    newline = request.forms.get('newline')
-    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    data = nowtime.decode('utf-8'), newline.decode('utf-8')
-    inputnewline(data)
-    return template(ROOT+'/index.html')
-
 def history():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
@@ -76,16 +65,45 @@ def history():
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)
 
-def baby():
+def createbaby(data):
+    conn = sqlite3.connect(ROOT+'/babyinfo.db')
+    cursor = conn.cursor()
+    cursor.execute('create table if not exists  babyinfo (name text, sex text, birthtime text)')
+    cursor.execute('insert into babyinfo (name, sex, birthtime) values (?,?,?)', data)
+    cursor.close()
+    conn.commit()
+    conn.close()
+
+def readbaby():
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
     cursor.execute('create table if not exists babyinfo (name text, sex text, birthtime text)')
     cursor.execute('select * from babyinfo')
-    notelist = cursor.fetchall()
-    return template(ROOT+'/baby.html', babylabel=notelist)
+    babyinfolist = cursor.fetchall()
+    return babyinfolist
+
+app = Bottle()
+app.route('/', method='GET')(home)
+
+@app.route('/index.html', method='POST')
+def save():
+    newline = request.forms.get('newline')
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
+    data = nowtime.decode('utf-8'), newline.decode('utf-8')
+    inputnewline(data)
+    return template(ROOT+'/index.html')
+
+@app.route('/baby.html', method='POST')
+def save():
+    name = request.forms.get('name')
+    sex = request.forms.get('sex')
+    birthtime = request.forms.get('birthtime')
+    data = name.decode('utf-8'), sex.decode('utf-8'), birthtime.decode('utf-8')
+    createbaby(data)
+    babyinfolist1 = readbaby()
+    return template(ROOT+'/baby.html', babylabel=babyinfolist1)
 
 app.route('/history.html', method=['GET'])(history)
-app.route('/baby.html', method=['GET'])(baby)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 

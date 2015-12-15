@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<link rel="stylesheet" href="/assets/css/amazeui.min.css">
 		<style>
 			 .get-title {
 		      font-size: 200%;
@@ -268,18 +267,21 @@
 			  <option value ="31">31</option>			  			  			  
 			</select>
 	  		<br /><br />	
-	  		<input type="button" onclick="showAndHidden2();" align="left" value="save" />           
+	  		<input type="submit" onclick="showAndHidden2();" align="left" value="save" />           
 	    </div>
 	    <div id="div2" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
-	  		<label>Name</label><br />
-	  		{{name}}
-	  		<br /><br />
-	  		<label>Sex</label><br />
-	  		{{sex}}
-	  		<br /><br />		 
-			<label>Birth Time</label><br />
-			{{birthtime}}
+			%for i in babylabel:
+				<div>
+		        	{{i[0]}}
+		        	{{i[1]}}
+		        	{{i[2]}}
+		    	</div>
+		    %end
+
 	    </div>			
+
+
+
 		<script type="text/javascript"> 
 			function showAndHidden1(){ 
 				var div1=document.getElementById("div1"); 
