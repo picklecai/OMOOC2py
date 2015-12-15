@@ -96,12 +96,12 @@ def save():
 @app.route('/baby.html', method='POST')
 def save():
     name = request.forms.get('name')
-    sex = request.forms.get('sex')
-    birthtime = request.forms.get('birthtime')
+    gender = request.forms.get('gender')
+    birthtime = time.strptime(request.forms.get('date')+'/'+request.forms.get('month')+'/'+request.forms.get('year')+'/', "%d/%m/%y")
     data = name.decode('utf-8'), sex.decode('utf-8'), birthtime.decode('utf-8')
     createbaby(data)
     babyinfolist1 = readbaby()
-    return template(ROOT+'/baby.html')#, babylabel=babyinfolist1)
+    return template(ROOT+'/baby.html', babylabel=babyinfolist1)
 
 app.route('/history.html', method=['GET'])(history)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
