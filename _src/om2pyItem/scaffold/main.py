@@ -101,7 +101,7 @@ def save():
     data = name.decode('utf-8'), sex.decode('utf-8'), birthtime.decode('utf-8')
     createbaby(data)
     babyinfolist1 = readbaby()
-    return template(ROOT+'/baby.html', babylabel=babyinfolist1)
+    return template(ROOT+'/baby.html')#, babylabel=babyinfolist1)
 
 app.route('/history.html', method=['GET'])(history)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
