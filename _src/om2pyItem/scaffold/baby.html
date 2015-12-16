@@ -193,7 +193,7 @@
 
 	  <br />
 	  <input type="button" onclick="showAndHidden1();" align="left" value="Add a new baby:" /> 
-	  <form action="/baby.html" method="POST">
+	  <form action="/baby.html" method="GET">
 		<div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
 	  		Name:<input name="name" type="text" /><br /><br />
 	  		Gender:<input name="gender" type="text" /><br /><br />
@@ -203,6 +203,7 @@
 			Date <input type="number" name="date" min="1" max="31" step="1" value="15">	<br /><br />	
 	  		<input type="submit" onclick="showAndHidden2();" align="left" value="save" />           
 	    </div>
+    </form>		    
 	    <div id="div2" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
 			%for i in babylabel:
 				<div>
@@ -228,7 +229,7 @@
 				} 
 		</script> 
 
-    </form>	
+
 
 	</body>
 </html>

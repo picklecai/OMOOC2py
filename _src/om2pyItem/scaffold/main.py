@@ -84,6 +84,7 @@ def readbaby():
 
 app = Bottle()
 app.route('/', method='GET')(home)
+# app.route('/baby.html', method='GET')
 
 @app.route('/index.html', method='POST')
 def save():
@@ -93,12 +94,13 @@ def save():
     inputnewline(data)
     return template(ROOT+'/index.html')
 
-@app.route('/baby.html', method='POST')
+
+@app.route('/baby.html', method='GET')
 def save():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
-    birthtime = time.strptime(request.forms.get('date')+'/'+request.forms.get('month')+'/'+request.forms.get('year')+'/', "%d/%m/%y")
-    data = name.decode('utf-8'), sex.decode('utf-8'), birthtime.decode('utf-8')
+    birthtime = time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
+    data = name.decode('utf-8'), gender.decode('utf-8'), birthtime.decode('utf-8')
     createbaby(data)
     babyinfolist1 = readbaby()
     return template(ROOT+'/baby.html', babylabel=babyinfolist1)
