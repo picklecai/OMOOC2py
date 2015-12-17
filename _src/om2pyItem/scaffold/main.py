@@ -12,6 +12,7 @@ from bottle import *
 import os
 import sqlite3
 import time
+import types
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -84,7 +85,6 @@ def readbaby():
 
 app = Bottle()
 app.route('/', method='GET')(home)
-# app.route('/baby.html', method='GET')
 
 @app.route('/index.html', method='POST')
 def save():
@@ -99,8 +99,8 @@ def save():
 def save():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
-    birthtime = time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
-    data = name.decode('utf-8'), gender.decode('utf-8'), birthtime.decode('utf-8')
+    birthtime = time.strftime("%d/%m/%Y") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
+    data = name.decode('utf-8'), gender.decode('utf-8'), birthtime
     createbaby(data)
     babyinfolist1 = readbaby()
     return template(ROOT+'/baby.html', babylabel=babyinfolist1)
