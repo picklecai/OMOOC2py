@@ -83,6 +83,8 @@ def readbaby():
     babyinfolist = cursor.fetchall()
     return babyinfolist
 
+
+
 app = Bottle()
 app.route('/', method='GET')(home)
 
@@ -94,8 +96,10 @@ def save():
     inputnewline(data)
     return template(ROOT+'/index.html')
 
-
 @app.route('/baby.html', method='GET')
+def baby():
+	return template(ROOT+'/baby.html')
+
 def save():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
@@ -105,6 +109,7 @@ def save():
     babyinfolist1 = readbaby()
     return template(ROOT+'/baby.html', babylabel=babyinfolist1)
 
+app.route('/baby.html', method='POST')(save)
 app.route('/history.html', method=['GET'])(history)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
