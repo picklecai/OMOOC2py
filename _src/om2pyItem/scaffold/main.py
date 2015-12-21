@@ -13,6 +13,7 @@ import os
 import sqlite3
 import time
 import types
+import re
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -58,13 +59,11 @@ def inputnewline(data):
     conn.commit()
     conn.close()
 
-def history():
-    conn = sqlite3.connect(ROOT+'/noterecord.db')
-    cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, record text)')
-    cursor.execute('select * from record')
-    notelist = cursor.fetchall()
-    return template(ROOT+'/history.html', historylabel=notelist)
+def validateEmail(email):
+    if len(email) > 7:
+        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
+            return 1
+    return 0
 
 def createbaby(data):
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
@@ -107,7 +106,21 @@ def savebaby():
 def baby():
     return template(ROOT+'/baby.html', babylabel=savebaby())
 
-app.route('/history.html', method=['GET'])(history)
+@app.route('/history.html', method=['GET'])
+def history():
+    conn = sqlite3.connect(ROOT+'/noterecord.db')
+    cursor = conn.cursor()
+    cursor.execute('create table if not exists record (time text, record text)')
+    cursor.execute('select * from record')
+    notelist = cursor.fetchall()
+    return template(ROOT+'/history.html', historylabel=notelist)
+
+@app.route('/history.html', method=['POST'])
+def sendEmail():
+    email = request.forms.get('email')
+    validateEmail(email)
+
+
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 
