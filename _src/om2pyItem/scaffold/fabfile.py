@@ -3,9 +3,10 @@
 
 def dataexam():
     import sqlite3
-    conn = sqlite3.connect('noterecord.db')
+    conn = sqlite3.connect('babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('select * from record')
+    cursor.execute('select * from babyinfo')
+    # cursor.execute('select count(*) from babyinfo')
     print cursor.fetchall()
     cursor.close()
     conn.commit()

@@ -69,8 +69,8 @@ def history():
 def createbaby(data):
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists  babyinfo (name text, sex text, birthtime text)')
-    cursor.execute('insert into babyinfo (name, sex, birthtime) values (?,?,?)', data)
+    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text)')
+    cursor.execute('insert into babyinfo (name, gender, birthtime) values (?,?,?)', data)
     cursor.close()
     conn.commit()
     conn.close()
@@ -78,12 +78,10 @@ def createbaby(data):
 def readbaby():
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists babyinfo (name text, sex text, birthtime text)')
+    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text)')
     cursor.execute('select * from babyinfo')
     babyinfolist = cursor.fetchall()
     return babyinfolist
-
-
 
 app = Bottle()
 app.route('/', method='GET')(home)
@@ -96,20 +94,19 @@ def save():
     inputnewline(data)
     return template(ROOT+'/index.html')
 
-@app.route('/baby.html', method='GET')
-def baby():
-	return template(ROOT+'/baby.html')
-
-def save():
+def savebaby():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
-    birthtime = time.strftime("%d/%m/%Y") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
-    data = name.decode('utf-8'), gender.decode('utf-8'), birthtime
+    birthtime = time.strftime("%d/%m/%Y  %H:%M:%S") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
+    # data = name.decode('utf-8'), gender.decode('utf-8'), birthtime
+    data = name, gender, birthtime.decode('utf-8')
     createbaby(data)
-    babyinfolist1 = readbaby()
-    return template(ROOT+'/baby.html', babylabel=babyinfolist1)
+    return readbaby()
+    
+@app.route('/baby.html', method='GET')
+def baby():
+    return template(ROOT+'/baby.html', babylabel=savebaby())
 
-app.route('/baby.html', method='POST')(save)
 app.route('/history.html', method=['GET'])(history)
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
