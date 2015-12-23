@@ -193,7 +193,7 @@
 
 	  <br />
 	  <input type="button" onclick="showAndHidden1();" align="left" value="Add a new baby:" /> 
-	  <form action="/baby.html" method="GET" onSubmit="showAndHidden2()">
+	  <form action="/baby.html" method="post" onSubmit="showAndHidden2()">
 		<div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
 	  		Name:<input name="name" type="text" /><br /><br />
 	  		Gender:<input name="gender" type="text" /><br /><br />
@@ -224,8 +224,6 @@
 				if(div2.style.display=='none') div2.style.display='block'; 
 				} 
 		</script> 
-
-
 
 	</body>
 </html>

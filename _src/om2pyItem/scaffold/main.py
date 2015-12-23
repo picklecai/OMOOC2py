@@ -92,21 +92,22 @@ def save():
     data = nowtime.decode('utf-8'), newline.decode('utf-8')
     inputnewline(data)
     return template(ROOT+'/index.html')
-
-def savebaby():
-    name = request.forms.get('name')
-    gender = request.forms.get('gender')
-    birthtime = time.strftime("%d/%m/%Y  %H:%M:%S") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
-    # data = name.decode('utf-8'), gender.decode('utf-8'), birthtime
-    data = name, gender, birthtime.decode('utf-8')
-    createbaby(data)
-    return readbaby()
     
 @app.route('/baby.html', method='GET')
 def baby():
     return template(ROOT+'/baby.html', babylabel=savebaby())
 
-@app.route('/history.html', method=['GET'])
+@app.route('/baby.html', method='POST')
+def savebaby():
+    name = request.forms.get('name')
+    gender = request.forms.get('gender')
+    birthtime = time.strftime("%d/%m/%Y  %H:%M:%S") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
+    # data = name.decode('utf-8'), gender.decode('utf-8'), birthtime.decode('utf-8')
+    data = name, gender, birthtime.decode('utf-8')
+    createbaby(data)
+    return readbaby()
+
+@app.route('/history.html', method='GET')
 def history():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
@@ -115,11 +116,10 @@ def history():
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)
 
-@app.route('/history.html', method=['POST'])
+@app.route('/history.html', method='POST')
 def sendEmail():
     email = request.forms.get('email')
     validateEmail(email)
-
 
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
