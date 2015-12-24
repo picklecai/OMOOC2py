@@ -95,23 +95,24 @@ def save():
     
 @app.route('/baby.html', method='GET')
 def baby():
-    babylabel=savebaby()
-    print babylabel
-    if babylabel ==None:
-        return  template(ROOT+'/baby.html')
+    return template(ROOT+'/baby.html')
 
-@app.route('/baby.html', method='POST')
+@app.route('/baby2.html', method='POST')
 def savebaby():
     name = request.forms.get('name')
+    print  'name is: %s'%(name)
     gender = request.forms.get('gender')
+    print  'gender is: %s'%(gender)
     birthtime = time.strftime("%d/%m/%Y  %H:%M:%S") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
     # data = name.decode('utf-8'), gender.decode('utf-8'), birthtime.decode('utf-8')
     if name==None or gender==None or birthtime==None:
         return None
     else:
         data = name, gender, birthtime.decode('utf-8')
+        print data
         createbaby(data)
-        return readbaby()
+        print readbaby()        
+        return template(ROOT+'/baby2.html', babylabel=readbaby())
 
 @app.route('/history.html', method='GET')
 def history():

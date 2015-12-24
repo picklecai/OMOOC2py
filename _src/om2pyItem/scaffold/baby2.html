@@ -190,33 +190,9 @@
 	  <div>
 	     <p><br><br></p>
 	  </div>
-
-	  <br />
-	  <input type="button" onclick="showAndHidden1();" align="left" value="Add a new baby:" /> 
-	  <form action="/baby2.html" method="post">
-		<div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
-	  		Name:<input name="name" type="text" /><br /><br />
-	  		Gender:<input name="gender" type="text" /><br /><br />
-			Birth Time:
-			Year <input type="number" name="year" min="2005" max="2020" step="1" value="2015">
-			Month <input type="number" name="month" min="1" max="12" step="1" value="1">
-			Date <input type="number" name="date" min="1" max="31" step="1" value="15">	<br /><br />	
-	  		<input type="submit" align="left" value="savebaby" name="savebaby" />           
-	    </div>
-      </form>	
-
-		<script type="text/javascript"> 
-			function showAndHidden1(){ 
-				var div1=document.getElementById("div1"); 
-				if(div1.style.display=='none') div1.style.display='block';
-				if(div2.style.display=='block') div2.style.display='none';  
-				} 
-			function showAndHidden2(){ 
-				var div2=document.getElementById("div2"); 
-				if(div1.style.display=='block') div1.style.display='none';  
-				if(div2.style.display=='none') div2.style.display='block'; 
-				} 
-		</script> 
-
+			Baby info:  {{babylabel}} 
+			<br />
+			<input type="button" onclick="showAndHidden1();" align="left" value="setting" />
+			<br />	 
 	</body>
 </html>
