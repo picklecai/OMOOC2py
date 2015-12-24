@@ -15,6 +15,7 @@ import time
 import types
 import re
 import datetime
+from os.path import exists
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -54,22 +55,20 @@ def calbabyage():
     if exists(filename):
         conn = sqlite3.connect(ROOT+'/babyinfo.db')
         cursor = conn.cursor()
-        cursor.execute('create table babyinfo (name text, gender text, birthtime text)')
-        cursor.execute('select birthtime from babyinfo')
-    
-    print today
+        cursor.execute('select birthtime from babyinfo order by settingtime desc limit 0,1')
+        bn = str(cursor.fetchall())
+        babybirth = datetime.date(int(bn[4:8]), int(bn[9:11]), int(bn[12:14]))
+    babyage = str(today - babybirth)
+    return babyage
 
 def inputnewline(data):
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    today = datetime.date.today() - datetime.timedelta(39)
-    print today
-
     babyage = calbabyage()
     data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, age int, record text)')
+    cursor.execute('create table if not exists record (time text, age text, record text)')
     cursor.execute('insert into record (time, age, record) values (?,?,?)', data)
     cursor.close()
     conn.commit()
@@ -84,8 +83,8 @@ def validateEmail(email):
 def createbaby(data):
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text)')
-    cursor.execute('insert into babyinfo (name, gender, birthtime) values (?,?,?)', data)
+    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text, settingtime text)')
+    cursor.execute('insert into babyinfo (name, gender, birthtime, settingtime) values (?,?,?,?)', data)
     cursor.close()
     conn.commit()
     conn.close()
@@ -93,7 +92,7 @@ def createbaby(data):
 def readbaby():
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text)')
+    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text, settingtime text)')
     cursor.execute('select * from babyinfo')
     babyinfolist = cursor.fetchall()
     return babyinfolist
@@ -105,7 +104,7 @@ app.route('/', method='GET')(home)
 def save():
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    babyage = 1
+    babyage = calbabyage()
     data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
     inputnewline(data)
     return template(ROOT+'/index.html')
@@ -119,10 +118,11 @@ def savebaby():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
     birthtime = datetime.datetime(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
+    settingtime = time.strftime("%d/%m/%Y %H:%M:%S")
     if name==None or gender==None or birthtime==None:
         return None
     else:
-        data = name.decode('utf-8'), gender.decode('utf-8'), birthtime
+        data = name.decode('utf-8'), gender.decode('utf-8'), birthtime, settingtime
         createbaby(data)
         readbaby()
         return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime)
@@ -131,7 +131,7 @@ def savebaby():
 def history():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, age int, record text)')
+    cursor.execute('create table if not exists record (time text, age text, record text)')
     cursor.execute('select * from record')
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)
