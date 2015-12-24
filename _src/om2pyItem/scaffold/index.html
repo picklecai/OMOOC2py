@@ -95,6 +95,15 @@
 		      background: #2d3e50;
 		    }
 			
+		    .labeltitle{
+		      background:#c6d7d2;
+		      color:#000000;
+		      font-size: 150%;
+		      text-align: left;
+		      padding: 5px 0 5px 0;
+		      font-weight:bold;
+		    }
+
 			.no1{			  
 				margin:50px;
 				border:0;			  
@@ -122,6 +131,7 @@
 
 			.nav_li a{ 
 				font-size:16px;
+				font-weight:bold;
 				display:block; /* 将链接设为块级元素 */
 				padding:5px 8px; /* 设置内边距 */
 				background:#85c80f; /* 设置背景色 */
@@ -187,12 +197,11 @@
 	    </div>
 	  </div>
 
-	  <div>
-	     <p><br><br></p>
-	  </div>
-
 	<form action="/index.html" method="POST">
-		</br>Please input a new line:</br>    
+		<div class="labeltitle">
+		Please input a new line:
+        </div>
+		</br>    
 		<div align="center" style="width:100%;padding:30px;padding-bottom:80px;">
 	    	<input name="newline" type="text" style="width:40%;float:left;"/>
 	    </div>

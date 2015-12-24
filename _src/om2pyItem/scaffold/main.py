@@ -14,6 +14,7 @@ import sqlite3
 import time
 import types
 import re
+import datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -47,14 +48,29 @@ def __ping():
 def home():
     return template(ROOT+'/index.html')
 
+def calbabyage():
+    today = datetime.date.today()
+    filename = ROOT+'/babyinfo.db' 
+    if exists(filename):
+        conn = sqlite3.connect(ROOT+'/babyinfo.db')
+        cursor = conn.cursor()
+        cursor.execute('create table babyinfo (name text, gender text, birthtime text)')
+        cursor.execute('select birthtime from babyinfo')
+    
+    print today
+
 def inputnewline(data):
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    data = nowtime.decode('utf-8'), newline.decode('utf-8')
+    today = datetime.date.today() - datetime.timedelta(39)
+    print today
+
+    babyage = calbabyage()
+    data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, record text)')
-    cursor.execute('insert into record (time, record) values (?,?)', data)
+    cursor.execute('create table if not exists record (time text, age int, record text)')
+    cursor.execute('insert into record (time, age, record) values (?,?,?)', data)
     cursor.close()
     conn.commit()
     conn.close()
@@ -89,7 +105,8 @@ app.route('/', method='GET')(home)
 def save():
     newline = request.forms.get('newline')
     nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    data = nowtime.decode('utf-8'), newline.decode('utf-8')
+    babyage = 1
+    data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
     inputnewline(data)
     return template(ROOT+'/index.html')
     
@@ -100,25 +117,21 @@ def baby():
 @app.route('/baby2.html', method='POST')
 def savebaby():
     name = request.forms.get('name')
-    print  'name is: %s'%(name)
     gender = request.forms.get('gender')
-    print  'gender is: %s'%(gender)
-    birthtime = time.strftime("%d/%m/%Y  %H:%M:%S") #time.strptime(str(request.forms.get('date'))+'/'+str(request.forms.get('month'))+'/'+str(request.forms.get('year')), "%d/%m/%Y")
-    # data = name.decode('utf-8'), gender.decode('utf-8'), birthtime.decode('utf-8')
+    birthtime = datetime.datetime(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
     if name==None or gender==None or birthtime==None:
         return None
     else:
-        data = name, gender, birthtime.decode('utf-8')
-        print data
+        data = name.decode('utf-8'), gender.decode('utf-8'), birthtime
         createbaby(data)
-        print readbaby()        
-        return template(ROOT+'/baby2.html', babylabel=readbaby())
+        readbaby()
+        return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime)
 
 @app.route('/history.html', method='GET')
 def history():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, record text)')
+    cursor.execute('create table if not exists record (time text, age int, record text)')
     cursor.execute('select * from record')
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)

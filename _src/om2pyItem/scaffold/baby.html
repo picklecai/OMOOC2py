@@ -94,6 +94,13 @@
 		      text-align: center;
 		      background: #2d3e50;
 		    }
+
+		    .labelrecord{
+		      background-color: #c6d7d2;
+		      text-align: left;
+		      padding: 2px 0 2px 0;
+    		  font-size: 16px;	
+		    }
 			
 			.no1{			  
 				margin:50px;
@@ -122,6 +129,7 @@
 
 			.nav_li a{ 
 				font-size:16px;
+				font-weight:bold;
 				display:block; /* 将链接设为块级元素 */
 				padding:5px 8px; /* 设置内边距 */
 				background:#85c80f; /* 设置背景色 */
@@ -186,22 +194,18 @@
 	      </ul>
 	    </div>
 	  </div>
-
-	  <div>
-	     <p><br><br></p>
-	  </div>
-
-	  <br />
-	  <input type="button" onclick="showAndHidden1();" align="left" value="Add a new baby:" /> 
+	  <input type="button" onclick="showAndHidden1();" align="left" value="添加宝宝信息："/> 
 	  <form action="/baby2.html" method="post">
 		<div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
-	  		Name:<input name="name" type="text" /><br /><br />
-	  		Gender:<input name="gender" type="text" /><br /><br />
-			Birth Time:
-			Year <input type="number" name="year" min="2005" max="2020" step="1" value="2015">
-			Month <input type="number" name="month" min="1" max="12" step="1" value="1">
-			Date <input type="number" name="date" min="1" max="31" step="1" value="15">	<br /><br />	
-	  		<input type="submit" align="left" value="savebaby" name="savebaby" />           
+		<span class="labelrecord">宝宝姓名：</span>
+	  		<input name="name" type="text" /><br /><br />
+		<span class="labelrecord">宝宝性别：</span>
+	  		<input name="gender" type="text" /><br /><br />
+		<span class="labelrecord">宝宝出生日期：</span>
+			<input type="number" name="year" min="2005" max="2020" step="1" value="2015">年
+			<input type="number" name="month" min="1" max="12" step="1" value="1">月
+			<input type="number" name="date" min="1" max="31" step="1" value="15">日<br /><br />	
+	  		<input type="submit" align="left" value="保存" name="savebaby" />           
 	    </div>
       </form>	
 
@@ -210,11 +214,6 @@
 				var div1=document.getElementById("div1"); 
 				if(div1.style.display=='none') div1.style.display='block';
 				if(div2.style.display=='block') div2.style.display='none';  
-				} 
-			function showAndHidden2(){ 
-				var div2=document.getElementById("div2"); 
-				if(div1.style.display=='block') div1.style.display='none';  
-				if(div2.style.display=='none') div2.style.display='block'; 
 				} 
 		</script> 
 

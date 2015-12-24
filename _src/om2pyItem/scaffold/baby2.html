@@ -95,6 +95,22 @@
 		      background: #2d3e50;
 		    }
 			
+		    .labeltitle{
+		      background:#c6d7d2;
+		      color:#000000;
+		      font-size: 150%;
+		      text-align: left;
+		      padding: 5px 0 5px 0;
+		      font-weight:bold;
+		    }
+
+		    .labelrecord{
+		      background-color: #c6d7d2;
+		      text-align: left;
+		      padding: 2px 0 2px 0;
+    		  font-size: 16px;	
+		    }
+
 			.no1{			  
 				margin:50px;
 				border:0;			  
@@ -122,6 +138,7 @@
 
 			.nav_li a{ 
 				font-size:16px;
+				font-weight:bold;
 				display:block; /* 将链接设为块级元素 */
 				padding:5px 8px; /* 设置内边距 */
 				background:#85c80f; /* 设置背景色 */
@@ -187,12 +204,19 @@
 	    </div>
 	  </div>
 
-	  <div>
-	     <p><br><br></p>
-	  </div>
-			Baby info:  {{babylabel}} 
-			<br />
-			<input type="button" onclick="showAndHidden1();" align="left" value="setting" />
-			<br />	 
+	<div class="labeltitle">宝宝信息：</div>
+
+	<div style="width:100%;padding:30px;padding-bottom:80px;">
+		<span class="labelrecord">宝宝姓名：</span>
+		{{name}}		
+		</br></br>
+		<span class="labelrecord">宝宝性别：</span>
+		{{gender}}
+		</br></br>
+		<span class="labelrecord">宝宝出生日期：</span>
+		{{birthtime}}
+		</br></br>
+	</div>
+		<br />	 
 	</body>
 </html>
