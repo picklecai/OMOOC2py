@@ -17,6 +17,8 @@ import re
 import datetime
 from os.path import exists
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
 import smtplib
 from email import encoders
 from email.header import Header
@@ -196,10 +198,26 @@ def sendmail():
     else:
         momemail = "caimeijuan@gmail.com"
     to_addr = momemail
-    msg = MIMEText('baby\'s record', 'plain', 'utf-8')
-    msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
-    msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
-    msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
+    historyrecord =  ROOT+'/noterecord.db' 
+    if exists(historyrecord):
+        msg = MIMEMultipart()
+        msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
+        msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
+        msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
+        msg.attach(MIMEText('baby\'s record', 'plain', 'utf-8'))
+        with open(historyrecord, 'rb') as f:
+            mime = MIMEBase('database', 'db', filename='noterecord.db')
+            mime.add_header('Content-Disposition', 'attachment', filename='noterecord.db')
+            mime.add_header('Content-ID', '<0>')
+            mime.add_header('X-Attachment-Id', '0')
+            mime.set_payload(f.read())
+            encoders.encode_base64(mime)
+            msg.attach(mime)
+    else:
+        msg = MIMEText('babyy\'s record', 'plain', 'utf-8')
+        msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
+        msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
+        msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
     server = smtplib.SMTP(smtp_server, 25) # SMTP协议默认端口是25
     server.set_debuglevel(1)
     server.login(from_addr, password)
