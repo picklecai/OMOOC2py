@@ -22,7 +22,6 @@ from email import encoders
 from email.header import Header
 from email.utils import parseaddr, formataddr
 
-
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 class MyWSGIRefServer(ServerAdapter):
@@ -161,8 +160,12 @@ def savebaby():
     birthtime = datetime.date(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
     momemail = request.forms.get('email')
     settingtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    if name==None or gender==None or birthtime==None:
-        return None
+    if name==None or gender==None or birthtime==None or validateEmail(momemail) == 0:
+        name = "重新设置"
+        gender = "重新设置"
+        birthtime = "重新设置"
+        momemail = "重新设置"
+        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
     else:
         data = name.decode('utf-8'), gender.decode('utf-8'), birthtime, momemail, settingtime
         createbaby(data)
@@ -203,11 +206,6 @@ def sendmail():
     server.sendmail(from_addr, [to_addr], msg.as_string())
     server.quit()
     return template(ROOT+'/email.html', momemail=momemail)
-
-@app.route('/history.html', method='POST')
-def sendEmail():
-    email = request.forms.get('email')
-    validateEmail(email)
 
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
