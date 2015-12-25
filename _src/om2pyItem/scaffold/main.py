@@ -47,7 +47,14 @@ def __ping():
     return "OK"
 
 def home():
-    return template(ROOT+'/index.html')
+    filename = ROOT+'/babyinfo.db' 
+    if exists(filename):
+        return template(ROOT+'/index.html')
+    else:
+        name = "未设置"
+        gender = "未设置"
+        birthtime = "未设置"
+        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime)
 
 def calbabyage():
     today = datetime.date.today()
@@ -58,7 +65,7 @@ def calbabyage():
         cursor.execute('select birthtime from babyinfo order by settingtime desc limit 0,1')
         bn = str(cursor.fetchall())
         babybirth = datetime.date(int(bn[4:8]), int(bn[9:11]), int(bn[12:14]))
-    babyage = str(today - babybirth)
+    babyage = str((today - babybirth).days)
     return babyage
 
 def inputnewline(data):
@@ -111,13 +118,30 @@ def save():
     
 @app.route('/baby.html', method='GET')
 def baby():
-    return template(ROOT+'/baby.html')
+    filename = ROOT+'/babyinfo.db' 
+    if exists(filename):
+        conn = sqlite3.connect(ROOT+'/babyinfo.db')
+        cursor = conn.cursor()
+        cursor.execute('select name from babyinfo order by settingtime desc limit 0,1')
+        n = str(cursor.fetchall())
+        name = n[4:-4].decode('unicode_escape')
+        cursor.execute('select gender from babyinfo order by settingtime desc limit 0,1')
+        g = str(cursor.fetchall())
+        gender = g[4:-4].decode('unicode_escape')
+        cursor.execute('select birthtime from babyinfo order by settingtime desc limit 0,1')
+        bn = str(cursor.fetchall())
+        birthtime = datetime.date(int(bn[4:8]), int(bn[9:11]), int(bn[12:14]))
+    else:
+        name = "未设置"
+        gender = "未设置"
+        birthtime = "未设置"
+    return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime)
 
 @app.route('/baby2.html', method='POST')
 def savebaby():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
-    birthtime = datetime.datetime(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
+    birthtime = datetime.date(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
     settingtime = time.strftime("%d/%m/%Y %H:%M:%S")
     if name==None or gender==None or birthtime==None:
         return None

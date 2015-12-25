@@ -194,7 +194,11 @@
 	      </ul>
 	    </div>
 	  </div>
-	  <input type="button" onclick="showAndHidden1();" align="left" value="添加宝宝信息："/> 
+
+    <div >友情提醒：如果第一次使用，请先点击菜单“宝宝信息”上传您宝宝的基本信息，否则系统会出错。</div>
+    </br>
+	  
+	  <input type="button" onclick="showAndHidden1();" align="left" value="更新宝宝信息："/> 
 	  <form action="/baby2.html" method="post">
 		<div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
 		<span class="labelrecord">宝宝姓名：</span>
@@ -208,6 +212,20 @@
 	  		<input type="submit" align="left" value="保存" name="savebaby" />           
 	    </div>
       </form>	
+
+	<div id="div2" style="width:100%;padding:30px;padding-bottom:80px;display:block">
+	<p class="labeltitle">宝宝信息：</p>
+		<span class="labelrecord">宝宝姓名：</span>
+		{{name}}		
+		</br></br>
+		<span class="labelrecord">宝宝性别：</span>
+		{{gender}}
+		</br></br>
+		<span class="labelrecord">宝宝出生日期：</span>
+		{{birthtime}}
+		</br></br>
+	</div>
+		<br />	
 
 		<script type="text/javascript"> 
 			function showAndHidden1(){ 
