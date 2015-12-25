@@ -16,6 +16,12 @@ import types
 import re
 import datetime
 from os.path import exists
+from email.mime.text import MIMEText
+import smtplib
+from email import encoders
+from email.header import Header
+from email.utils import parseaddr, formataddr
+
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -39,6 +45,12 @@ class MyWSGIRefServer(ServerAdapter):
         self.server.server_close()
         print "# QWEBAPPEND"
 
+def _format_addr(s):
+    name, addr = parseaddr(s)
+    return formataddr(( \
+        Header(name, 'utf-8').encode(), \
+        addr.encode('utf-8') if isinstance(addr, unicode) else addr))
+
 def __exit():
     global server
     server.stop()
@@ -54,7 +66,8 @@ def home():
         name = "未设置"
         gender = "未设置"
         birthtime = "未设置"
-        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime)
+        momemail = "未设置"
+        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
 
 def calbabyage():
     today = datetime.date.today()
@@ -90,8 +103,8 @@ def validateEmail(email):
 def createbaby(data):
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text, settingtime text)')
-    cursor.execute('insert into babyinfo (name, gender, birthtime, settingtime) values (?,?,?,?)', data)
+    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text, momemail text, settingtime text)')
+    cursor.execute('insert into babyinfo (name, gender, birthtime, momemail, settingtime) values (?,?,?,?,?)', data)
     cursor.close()
     conn.commit()
     conn.close()
@@ -99,7 +112,7 @@ def createbaby(data):
 def readbaby():
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
     cursor = conn.cursor()
-    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text, settingtime text)')
+    cursor.execute('create table if not exists babyinfo (name text, gender text, birthtime text, momemail text, settingtime text)')
     cursor.execute('select * from babyinfo')
     babyinfolist = cursor.fetchall()
     return babyinfolist
@@ -131,25 +144,30 @@ def baby():
         cursor.execute('select birthtime from babyinfo order by settingtime desc limit 0,1')
         bn = str(cursor.fetchall())
         birthtime = datetime.date(int(bn[4:8]), int(bn[9:11]), int(bn[12:14]))
+        cursor.execute('select momemail from babyinfo order by settingtime desc limit 0,1')
+        em = str(cursor.fetchall())
+        momemail = em[4:-4].decode('utf-8')
     else:
         name = "未设置"
         gender = "未设置"
         birthtime = "未设置"
-    return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime)
+        momemail = "未设置"
+    return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
 
 @app.route('/baby2.html', method='POST')
 def savebaby():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
     birthtime = datetime.date(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
+    momemail = request.forms.get('email')
     settingtime = time.strftime("%d/%m/%Y %H:%M:%S")
     if name==None or gender==None or birthtime==None:
         return None
     else:
-        data = name.decode('utf-8'), gender.decode('utf-8'), birthtime, settingtime
+        data = name.decode('utf-8'), gender.decode('utf-8'), birthtime, momemail, settingtime
         createbaby(data)
         readbaby()
-        return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime)
+        return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
 
 @app.route('/history.html', method='GET')
 def history():
@@ -159,6 +177,32 @@ def history():
     cursor.execute('select * from record')
     notelist = cursor.fetchall()
     return template(ROOT+'/history.html', historylabel=notelist)
+
+@app.route('/email.html', method='GET')
+def sendmail():
+    from_addr = "pickle.ahcai@163.com"
+    password = "ahcai318"
+    smtp_server = "smtp.163.com"
+    filename = ROOT+'/babyinfo.db' 
+    if exists(filename):
+        conn = sqlite3.connect(ROOT+'/babyinfo.db')
+        cursor = conn.cursor()
+        cursor.execute('select momemail from babyinfo order by settingtime desc limit 0,1')
+        em = str(cursor.fetchall())
+        momemail = em[4:-4].decode('utf-8')
+    else:
+        momemail = "caimeijuan@gmail.com"
+    to_addr = momemail
+    msg = MIMEText('baby\'s record', 'plain', 'utf-8')
+    msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
+    msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
+    msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
+    server = smtplib.SMTP(smtp_server, 25) # SMTP协议默认端口是25
+    server.set_debuglevel(1)
+    server.login(from_addr, password)
+    server.sendmail(from_addr, [to_addr], msg.as_string())
+    server.quit()
+    return template(ROOT+'/email.html', momemail=momemail)
 
 @app.route('/history.html', method='POST')
 def sendEmail():

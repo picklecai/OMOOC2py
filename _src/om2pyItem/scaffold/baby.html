@@ -190,6 +190,7 @@
 	        <li ><a href="/">开始记录</a></li>
 	        <li><a href="history.html">查看历史</a></li>
 	        <li><a href="baby.html">宝宝信息</a></li>
+	        <li><a href="email.html">发送邮箱</a></li>
 	        </li>
 	      </ul>
 	    </div>
@@ -208,8 +209,10 @@
 		<span class="labelrecord">宝宝出生日期：</span>
 			<input type="number" name="year" min="2005" max="2020" step="1" value="2015">年
 			<input type="number" name="month" min="1" max="12" step="1" value="1">月
-			<input type="number" name="date" min="1" max="31" step="1" value="15">日<br /><br />	
-	  		<input type="submit" align="left" value="保存" name="savebaby" />           
+			<input type="number" name="date" min="1" max="31" step="1" value="15">日<br /><br />
+	  	<span class="labelrecord">妈妈邮箱：</span>
+			<input name="email" type="text" />	<br /><br />			
+	  	<input type="submit" align="left" value="保存" name="savebaby" />
 	    </div>
       </form>	
 
@@ -224,6 +227,9 @@
 		<span class="labelrecord">宝宝出生日期：</span>
 		{{birthtime}}
 		</br></br>
+		<span class="labelrecord">妈妈邮箱：</span>
+		{{momemail}}
+		<br /><br />
 	</div>
 		<br />	
 
