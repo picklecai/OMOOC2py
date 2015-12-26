@@ -62,4 +62,13 @@ win8
 实际执行结果发现，由于代码太多，生成的二维码无比密集，不知道要举着手机照多久才扫得出来，所以这功能并不实用。  
 
 ![](http://7xotr7.com1.z0.glb.clouddn.com/15-12-7/89850340.jpg)  
-这是在选择smallest的情况下，如果更大，右边图片根本不出来。  
+这是在选择smallest的情况下，如果更大，右边图片根本不出来。    
+
+
+### 如何打包apk  
+[如何用 QPython 极速开发 PyConChina App](http://qpython.org/pyconchina2015/apkbuilder.html)  
+说可以直接提交。
+ 
+已安装版本没发现，于是到[QPython - 安卓上的Python](http://www.pgyer.com/qpython)重新安装了一个新版本1.2.2，仍然没发现。  
+
+和大妈联系，这是收费项目，并非内置。囧~
