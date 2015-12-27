@@ -23,6 +23,7 @@ import smtplib
 from email import encoders
 from email.header import Header
 from email.utils import parseaddr, formataddr
+import androidhelper,sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -227,6 +228,11 @@ def sendmail():
 
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
+
+@app.route('/camera.html', method='GET')
+def camerababy():
+	droid = androidhelper.Android()
+	droid.cameracapturepicture("776779.jpg",True)
 
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
