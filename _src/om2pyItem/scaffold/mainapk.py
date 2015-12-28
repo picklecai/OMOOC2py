@@ -1,5 +1,5 @@
 # _*_ coding:utf-8 _*_
-#qpy:webapp:simple notebook
+#qpy:webapp:babyrecord
 #qpy:fullscreen
 #qpy://localhost:8800
 

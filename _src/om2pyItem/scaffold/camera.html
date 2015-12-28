@@ -196,7 +196,7 @@
 	<div class="nav" align="center" >
 	    <div class="nav_li" align="center" >
 	      <ul>
-	        <li ><a href="/">开始记录</a></li>
+	        <li><a href="/">开始记录</a></li>
 	        <li><a href="history.html">查看历史</a></li>
 	        <li><a href="baby.html">宝宝信息</a></li>
 	        <li><a href="email.html">发送邮箱</a></li>
@@ -210,9 +210,14 @@
     </br>
 
 	</br></br>
-	<div class="labeltitle">：</div>
+	<div class="labeltitle">照片目录：</div>
 	</br>
-	<div class="labelrecord"> </div>
+	<div class="labelrecord">
+         /photo文件夹中已经存了{{photoid}}张照片。</br>
+    %for i in photoname:
+		<div class="labelrecord"> 拍照时间：{{i[0]}} 照片名：{{i[1]}}</div>
+    %end
+	</div>
    	</div>
 	</body>
 </html>

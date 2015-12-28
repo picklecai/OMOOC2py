@@ -1,5 +1,5 @@
 # _*_ coding:utf-8 _*_
-#qpy:webapp:simple notebook
+#qpy:webapp:babyrecord
 #qpy:fullscreen
 #qpy://localhost:8800
 
@@ -23,7 +23,8 @@ import smtplib
 from email import encoders
 from email.header import Header
 from email.utils import parseaddr, formataddr
-import androidhelper,sys
+import sys
+import androidhelper
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -205,7 +206,7 @@ def sendmail():
         msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
         msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
         msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
-        msg.attach(MIMEText('baby\'s record', 'plain', 'utf-8'))
+        msg.attach(MIMEText('附件是您宝宝的日常记录，请查收。祝您生活愉快！宝宝健康快乐！', 'plain', 'utf-8'))
         with open(historyrecord, 'rb') as f:
             mime = MIMEBase('database', 'db', filename='noterecord.db')
             mime.add_header('Content-Disposition', 'attachment', filename='noterecord.db')
@@ -215,7 +216,7 @@ def sendmail():
             encoders.encode_base64(mime)
             msg.attach(mime)
     else:
-        msg = MIMEText('babyy\'s record', 'plain', 'utf-8')
+        msg = MIMEText('您尚未开始记录宝宝的日常记录，记录后可收到带宝宝记录附件的邮件！', 'plain', 'utf-8')
         msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
         msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
         msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
@@ -229,10 +230,42 @@ def sendmail():
 app.route('/__exit', method=['GET', 'HEAD'])(__exit)
 app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 
+def savephotoname(data):
+    # 保存照片名列表    
+    conn = sqlite3.connect(ROOT+'/photoname.db')
+    cursor = conn.cursor()
+    cursor.execute('create table if not exists photoname (time text, name text)')
+    cursor.execute('insert into photoname (time, name) values (?,?)', data)
+    cursor.close()
+    conn.commit()
+    conn.close()
+
+def readphotoname():
+    conn = sqlite3.connect(ROOT+'/photoname.db')
+    cursor = conn.cursor()	
+    cursor.execute('create table if not exists photoname (time text, name text)')
+    cursor.execute('select * from photoname')
+    namelist = cursor.fetchall()
+    return namelist
+
 @app.route('/camera.html', method='GET')
 def camerababy():
-	droid = androidhelper.Android()
-	droid.cameracapturepicture("776779.jpg",True)
+    droid = androidhelper.Android()
+    if not exists(ROOT+'/photo'):
+        photoid = 1 
+        os.mkdir('/photo')
+    else:
+        photoid = sum([len(files) for root,dirs,files in os.walk(ROOT+'/photo')]) + 1
+    # 设置并保存照片名
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")    
+    photoname = str('babyrecordphoto%d.jpg' % photoid)
+    data = nowtime, photoname
+    savephotoname(data)
+    # 读取照片名
+    namelist = readphotoname()  
+    # 拍照
+    droid.cameraInteractiveCapturePicture(ROOT+'/photo/%s' % photoname)
+    return template(ROOT+'/camera.html', photoid=photoid, photoname=namelist)
 
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
