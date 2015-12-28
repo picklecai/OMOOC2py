@@ -1018,7 +1018,7 @@ def camerababy():
     droid = androidhelper.Android()
     if not exists(ROOT+'/photo'):
         photoid = 1
-        os.mkdir('/photo')
+        os.makedirs(ROOT+'/photo')
     else:
         photoid = sum([len(files) for root,dirs,files in os.walk(ROOT+'/photo')]) + 1
     # 设置照片名
