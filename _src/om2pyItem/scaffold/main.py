@@ -8,23 +8,13 @@ Babyrecordapp
 @Author Picklecai
 """
 
-from bottle import *
 import os
+from os.path import exists
+from bottle import Bottle, ServerAdapter, request, template
 import sqlite3
 import time
-import types
-import re
 import datetime
-from os.path import exists
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-import smtplib
-from email import encoders
 from email.header import Header
-from email.utils import parseaddr, formataddr
-import sys
-import androidhelper
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -48,12 +38,6 @@ class MyWSGIRefServer(ServerAdapter):
         self.server.server_close()
         print "# QWEBAPPEND"
 
-def _format_addr(s):
-    name, addr = parseaddr(s)
-    return formataddr(( \
-        Header(name, 'utf-8').encode(), \
-        addr.encode('utf-8') if isinstance(addr, unicode) else addr))
-
 def __exit():
     global server
     server.stop()
@@ -62,7 +46,7 @@ def __ping():
     return "OK"
 
 def home():
-    filename = ROOT+'/babyinfo.db' 
+    filename = ROOT+'/babyinfo.db'
     if exists(filename):
         return template(ROOT+'/index.html')
     else:
@@ -71,18 +55,6 @@ def home():
         birthtime = "未设置"
         momemail = "未设置"
         return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
-
-def calbabyage():
-    today = datetime.date.today()
-    filename = ROOT+'/babyinfo.db' 
-    if exists(filename):
-        conn = sqlite3.connect(ROOT+'/babyinfo.db')
-        cursor = conn.cursor()
-        cursor.execute('select birthtime from babyinfo order by settingtime desc limit 0,1')
-        bn = str(cursor.fetchall())
-        babybirth = datetime.date(int(bn[4:8]), int(bn[9:11]), int(bn[12:14]))
-    babyage = str((today - babybirth).days)
-    return babyage
 
 def inputnewline(data):
     newline = request.forms.get('newline')
@@ -97,11 +69,21 @@ def inputnewline(data):
     conn.commit()
     conn.close()
 
-def validateEmail(email):
-    if len(email) > 7:
-        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
-            return 1
-    return 0
+def save():
+    newline = request.forms.get('newline')
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
+    babyage = calbabyage()
+    data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
+    inputnewline(data)
+    return template(ROOT+'/index.html')
+
+def history():
+    conn = sqlite3.connect(ROOT+'/noterecord.db')
+    cursor = conn.cursor()
+    cursor.execute('create table if not exists record (time text, age text, record text)')
+    cursor.execute('select * from record')
+    notelist = cursor.fetchall()
+    return template(ROOT+'/history.html', historylabel=notelist)
 
 def createbaby(data):
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
@@ -120,21 +102,20 @@ def readbaby():
     babyinfolist = cursor.fetchall()
     return babyinfolist
 
-app = Bottle()
-app.route('/', method='GET')(home)
+def calbabyage():
+    today = datetime.date.today()
+    filename = ROOT+'/babyinfo.db'
+    if exists(filename):
+        conn = sqlite3.connect(ROOT+'/babyinfo.db')
+        cursor = conn.cursor()
+        cursor.execute('select birthtime from babyinfo order by settingtime desc limit 0,1')
+        bn = str(cursor.fetchall())
+        babybirth = datetime.date(int(bn[4:8]), int(bn[9:11]), int(bn[12:14]))
+    babyage = str((today - babybirth).days)
+    return babyage
 
-@app.route('/index.html', method='POST')
-def save():
-    newline = request.forms.get('newline')
-    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    babyage = calbabyage()
-    data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
-    inputnewline(data)
-    return template(ROOT+'/index.html')
-    
-@app.route('/baby.html', method='GET')
 def baby():
-    filename = ROOT+'/babyinfo.db' 
+    filename = ROOT+'/babyinfo.db'
     if exists(filename):
         conn = sqlite3.connect(ROOT+'/babyinfo.db')
         cursor = conn.cursor()
@@ -157,14 +138,13 @@ def baby():
         momemail = "未设置"
     return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
 
-@app.route('/baby2.html', method='POST')
 def savebaby():
     name = request.forms.get('name')
     gender = request.forms.get('gender')
     birthtime = datetime.date(int(request.forms.get('year')), int(request.forms.get('month')), int(request.forms.get('date')))
     momemail = request.forms.get('email')
     settingtime = time.strftime("%d/%m/%Y %H:%M:%S")
-    if name==None or gender==None or birthtime==None or validateEmail(momemail) == 0:
+    if name==None or gender==None or birthtime==None or validateEmail(momemail)== 0:
         name = "重新设置"
         gender = "重新设置"
         birthtime = "重新设置"
@@ -176,21 +156,32 @@ def savebaby():
         readbaby()
         return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
 
-@app.route('/history.html', method='GET')
-def history():
-    conn = sqlite3.connect(ROOT+'/noterecord.db')
-    cursor = conn.cursor()
-    cursor.execute('create table if not exists record (time text, age text, record text)')
-    cursor.execute('select * from record')
-    notelist = cursor.fetchall()
-    return template(ROOT+'/history.html', historylabel=notelist)
+def _format_addr(s):
+    from email.utils import parseaddr, formataddr
+    name, addr = parseaddr(s)
+    return formataddr(( \
+        Header(name, 'utf-8').encode(), \
+        addr.encode('utf-8') if isinstance(addr, unicode) else addr))
 
-@app.route('/email.html', method='GET')
+def validateEmail(email):
+    import re
+    if len(email) > 7:
+        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
+            return 1
+    return 0
+
 def sendmail():
+    # 导入email模块
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.base import MIMEBase
+    from email import encoders
+    import smtplib
+    # 设置邮件变量
     from_addr = "pickle.ahcai@163.com"
     password = "ahcai318"
     smtp_server = "smtp.163.com"
-    filename = ROOT+'/babyinfo.db' 
+    filename = ROOT+'/babyinfo.db'
     if exists(filename):
         conn = sqlite3.connect(ROOT+'/babyinfo.db')
         cursor = conn.cursor()
@@ -200,15 +191,16 @@ def sendmail():
     else:
         momemail = "caimeijuan@gmail.com"
     to_addr = momemail
-    historyrecord =  ROOT+'/noterecord.db' 
+    historyrecord = ROOT+'/noterecord.db'
+    # 发邮件
     if exists(historyrecord):
         msg = MIMEMultipart()
-        msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
+        msg['From'] = _format_addr(u'我在长大 <%s>' % from_addr)
         msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
         msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
         msg.attach(MIMEText('附件是您宝宝的日常记录，请查收。祝您生活愉快！宝宝健康快乐！', 'plain', 'utf-8'))
         with open(historyrecord, 'rb') as f:
-            mime = MIMEBase('database', 'db', filename='noterecord.db')
+            mime = MIMEBase('database', 'xls', filename='noterecord.xls')
             mime.add_header('Content-Disposition', 'attachment', filename='noterecord.db')
             mime.add_header('Content-ID', '<0>')
             mime.add_header('X-Attachment-Id', '0')
@@ -217,21 +209,18 @@ def sendmail():
             msg.attach(mime)
     else:
         msg = MIMEText('您尚未开始记录宝宝的日常记录，记录后可收到带宝宝记录附件的邮件！', 'plain', 'utf-8')
-        msg['From'] = _format_addr(u'我在成长 <%s>' % from_addr)
+        msg['From'] = _format_addr(u'我在长大 <%s>' % from_addr)
         msg['To'] = _format_addr(u'亲爱的妈妈 <%s>' % to_addr)
         msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
-    server = smtplib.SMTP(smtp_server, 25) # SMTP协议默认端口是25
+    server = smtplib.SMTP(smtp_server, 25)  # SMTP协议默认端口是25
     server.set_debuglevel(1)
     server.login(from_addr, password)
     server.sendmail(from_addr, [to_addr], msg.as_string())
     server.quit()
     return template(ROOT+'/email.html', momemail=momemail)
 
-app.route('/__exit', method=['GET', 'HEAD'])(__exit)
-app.route('/__ping', method=['GET', 'HEAD'])(__ping)
-
 def savephotoname(data):
-    # 保存照片名列表    
+    # 保存照片名列表
     conn = sqlite3.connect(ROOT+'/photoname.db')
     cursor = conn.cursor()
     cursor.execute('create table if not exists photoname (time text, name text)')
@@ -242,30 +231,42 @@ def savephotoname(data):
 
 def readphotoname():
     conn = sqlite3.connect(ROOT+'/photoname.db')
-    cursor = conn.cursor()	
+    cursor = conn.cursor()
     cursor.execute('create table if not exists photoname (time text, name text)')
     cursor.execute('select * from photoname')
     namelist = cursor.fetchall()
     return namelist
 
-@app.route('/camera.html', method='GET')
 def camerababy():
+    import androidhelper
     droid = androidhelper.Android()
     if not exists(ROOT+'/photo'):
-        photoid = 1 
+        photoid = 1
         os.mkdir('/photo')
     else:
         photoid = sum([len(files) for root,dirs,files in os.walk(ROOT+'/photo')]) + 1
-    # 设置并保存照片名
-    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")    
+    # 设置照片名
     photoname = str('babyrecordphoto%d.jpg' % photoid)
+    # 拍照
+    droid.cameraInteractiveCapturePicture(ROOT+'/photo/%s' % photoname)
+    # 保存照片名
+    nowtime = time.strftime("%d/%m/%Y %H:%M:%S")
     data = nowtime, photoname
     savephotoname(data)
     # 读取照片名
-    namelist = readphotoname()  
-    # 拍照
-    droid.cameraInteractiveCapturePicture(ROOT+'/photo/%s' % photoname)
+    namelist = readphotoname()
     return template(ROOT+'/camera.html', photoid=photoid, photoname=namelist)
+
+app = Bottle()
+app.route('/', method='GET')(home)
+app.route('/index.html', method='POST')(save)
+app.route('/history.html', method='GET')(history)
+app.route('/baby.html', method='GET')(baby)
+app.route('/baby2.html', method='POST')(savebaby)
+app.route('/email.html', method='GET')(sendmail)
+app.route('/camera.html', method='GET')(camerababy)
+app.route('/__exit', method=['GET', 'HEAD'])(__exit)
+app.route('/__ping', method=['GET', 'HEAD'])(__ping)
 
 try:
     server = MyWSGIRefServer(host="localhost", port="8800")
