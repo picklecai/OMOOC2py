@@ -130,7 +130,7 @@ indexhtml = '''
     <div >友情提醒：如果第一次使用，请先点击菜单“宝宝信息”上传您宝宝的基本信息，否则系统会出错。</div>
     </br>
 
-    <form action="/index.html" method="POST">
+    <form action="/indexhtml" method="POST">
         <div class="labeltitle">
         请记录宝宝今天的表现吧:
         </div>
@@ -256,49 +256,14 @@ historyhtml = '''
       </div>
     <div >友情提醒：如果第一次使用，请先点击菜单“宝宝信息”上传您宝宝的基本信息，否则系统会出错。</div>
     </br>
-      
-      <input type="button" onclick="showAndHidden1();" align="left" value="更新宝宝信息："/> 
-      <form action="/baby2.html" method="post">
-        <div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
-        <span class="labelrecord">宝宝姓名：</span>
-            <input name="name" type="text" /><br /><br />
-        <span class="labelrecord">宝宝性别：</span>
-            <input name="gender" type="text" /><br /><br />
-        <span class="labelrecord">宝宝出生日期：</span>
-            <input type="number" name="year" min="2005" max="2020" step="1" value="2015">年
-            <input type="number" name="month" min="1" max="12" step="1" value="1">月
-            <input type="number" name="date" min="1" max="31" step="1" value="15">日<br /><br />
-        <span class="labelrecord">妈妈邮箱：</span>
-            <input name="email" type="text" />  <br /><br />            
-        <input type="submit" align="left" value="保存" name="savebaby" />
-        </div>
-      </form>   
 
-    <div id="div2" style="width:100%;padding:30px;padding-bottom:80px;display:block">
-    <p class="labeltitle">宝宝信息：</p>
-        <span class="labelrecord">宝宝姓名：</span>
-        {{name}}        
-        </br></br>
-        <span class="labelrecord">宝宝性别：</span>
-        {{gender}}
-        </br></br>
-        <span class="labelrecord">宝宝出生日期：</span>
-        {{birthtime}}
-        </br></br>
-        <span class="labelrecord">妈妈邮箱：</span>
-        {{momemail}}
-        <br /><br />
-    </div>
-        <br />  
-
-        <script type="text/javascript"> 
-            function showAndHidden1(){ 
-                var div1=document.getElementById("div1"); 
-                if(div1.style.display=='none') div1.style.display='block';
-                if(div2.style.display=='block') div2.style.display='none';  
-                } 
-        </script> 
-
+	<div class="labeltitle">历史记录：</div>
+	%for i in historylabel:
+		<div class="labelrecord"> 现在时间是：{{i[0]}}</div>
+		<div class="labelrecord"> 宝宝今天{{i[1]}}天</div>
+		<div class="labelrecord"> 宝宝今天的表现是：{{i[2]}}</div> 
+    %end		
+   	</div>
     </body>
 </html>
 '''
@@ -414,7 +379,7 @@ babyhtml = '''
     </br>
       
       <input type="button" onclick="showAndHidden1();" align="left" value="更新宝宝信息："/> 
-      <form action="/baby2.html" method="post">
+      <form action="/baby2html" method="post">
         <div id="div1" align="left" style="width:100%;padding:30px;padding-bottom:80px;display:none;">
         <span class="labelrecord">宝宝姓名：</span>
             <input name="name" type="text" /><br /><br />
