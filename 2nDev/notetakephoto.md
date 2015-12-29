@@ -124,4 +124,10 @@ cameraInteractiveCapturePicture(targetPath) Starts the image capture application
 
         if not exists(ROOT+'/photo'):
 	        photoid = 1 
-	        os.mkdir('/photo')
+	        os.mkdir('/photo')  
+
+误，还是要改成makedirs：  
+
+    if not exists(ROOT+'/photo'):
+	        photoid = 1 
+	        os.makedirs(ROOT+'/photo') 
