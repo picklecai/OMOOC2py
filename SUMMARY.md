@@ -48,7 +48,7 @@
    * [2w 记事本v2.0：单机图形界面版](_src/om2py2w/2wex0/README.md)
    * [3w 记事本v3.0：内网命令行版](_src/om2py3w/3wex0/README.md)
    * [4w 记事本v4.0：内网浏览器版](_src/om2py4w/4wex0/README.md)
-   * [7w 记事本v7.0：手机apk版](_src/om2py4w/7wex0/调试笔记.md)
+   * [7w 记事本v7.0：手机apk版](_src/om2py7w/7wex0/调试笔记.md)
 * [有关](ABOUT.md)
 * [素材 (draft)](draft/README.md)
    * [教程该怎么写](draft/how2tutorial.md)
