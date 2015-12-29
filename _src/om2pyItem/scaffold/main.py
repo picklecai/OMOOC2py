@@ -45,16 +45,36 @@ def __exit():
 def __ping():
     return "OK"
 
+def readbabyname():
+    filename = ROOT+'/babyinfo.db'
+    if exists(filename):
+    	conn = sqlite3.connect(ROOT+'/babyinfo.db')
+        cursor = conn.cursor()
+        cursor.execute('select name from babyinfo order by settingtime desc limit 0,1')
+        n = str(cursor.fetchall())
+        name = n[4:-4].decode('unicode_escape')
+        tips = u"宝宝：%s" % name
+    else:
+    	tips = "友情提醒：如果第一次使用，请先点击菜单“宝宝信息”上传您宝宝的基本信息，否则系统无法计算宝宝年龄。"
+    return tips
+
 def home():
     filename = ROOT+'/babyinfo.db'
     if exists(filename):
-        return template(ROOT+'/index.html')
+    	conn = sqlite3.connect(ROOT+'/babyinfo.db')
+        cursor = conn.cursor()
+        cursor.execute('select name from babyinfo order by settingtime desc limit 0,1')
+        n = str(cursor.fetchall())
+        name = n[4:-4].decode('unicode_escape')
+        tips = u"宝宝：%s" % name
+        return template(ROOT+'/index.html', tips=tips)
     else:
         name = "未设置"
         gender = "未设置"
         birthtime = "未设置"
         momemail = "未设置"
-        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
+        tips = "请上传您宝宝的基本信息，否则系统无法计算宝宝年龄。"
+        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail, tips=tips)
 
 def inputnewline(data):
     newline = request.forms.get('newline')
@@ -75,7 +95,8 @@ def save():
     babyage = calbabyage()
     data = nowtime.decode('utf-8'), babyage, newline.decode('utf-8')
     inputnewline(data)
-    return template(ROOT+'/index.html')
+    tips = readbabyname()
+    return template(ROOT+'/index.html', tips = tips)
 
 def history():
     conn = sqlite3.connect(ROOT+'/noterecord.db')
@@ -83,7 +104,8 @@ def history():
     cursor.execute('create table if not exists record (time text, age text, record text)')
     cursor.execute('select * from record')
     notelist = cursor.fetchall()
-    return template(ROOT+'/history.html', historylabel=notelist)
+    tips = readbabyname()
+    return template(ROOT+'/history.html', historylabel=notelist, tips=tips)
 
 def createbaby(data):
     conn = sqlite3.connect(ROOT+'/babyinfo.db')
@@ -131,12 +153,14 @@ def baby():
         cursor.execute('select momemail from babyinfo order by settingtime desc limit 0,1')
         em = str(cursor.fetchall())
         momemail = em[4:-4].decode('utf-8')
+        tips = u"宝宝：%s"%name
     else:
         name = "未设置"
         gender = "未设置"
         birthtime = "未设置"
         momemail = "未设置"
-    return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
+        tips = "请上传您宝宝的基本信息，否则系统无法计算宝宝年龄。"
+    return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail, tips=tips)
 
 def savebaby():
     name = request.forms.get('name')
@@ -149,12 +173,14 @@ def savebaby():
         gender = "重新设置"
         birthtime = "重新设置"
         momemail = "重新设置"
-        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
+        tips = "请重新设置宝宝信息及妈妈邮箱。"
+        return template(ROOT+'/baby.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail, tips=tips)
     else:
         data = name.decode('utf-8'), gender.decode('utf-8'), birthtime, momemail, settingtime
+        tips = "宝宝：%s" % name
         createbaby(data)
         readbaby()
-        return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail)
+        return template(ROOT+'/baby2.html', name=name, gender=gender, birthtime=birthtime, momemail=momemail, tips=tips)
 
 def _format_addr(s):
     from email.utils import parseaddr, formataddr

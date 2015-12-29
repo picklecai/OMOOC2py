@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<META http-equiv=Content-Type content=text/html; charset=utf-8>
+		<title>babyrecord</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<style>
+			 .get-title {
+		      font-size: 200%;
+		      border: 2px solid #fff;
+		      padding: 5px;
+		      display: inline-block;
+		    }
+		     .get {
+		      background: #85c80f;
+		      color: #fff;
+		      text-align: center;
+		      padding: 15px 0;
+		    }
+
+		    .labeltitle{
+		      background:#c6d7d2;
+		      color:#000000;
+		      font-size: 150%;
+		      text-align: left;
+		      padding: 5px 0 5px 0;
+		      font-weight:bold;
+		    }
+
+		    .labelrecord{
+		      background-color: #c6d7d2;
+		      text-align: left;
+		      padding: 2px 0 2px 0;
+    		  font-size: 16px;	
+		    }
+
+			.nav{			  
+				background:#85c80f;
+				text-align: center;
+				list-style-type:none;
+				margin:0;
+				padding:0;
+			}
+
+			.nav_li{
+				margin:auto; 
+				padding:inherit; 
+				line-height:45px;
+			}
+
+			.nav_li li{ 
+				width:10%;
+				display: inline-block;
+			}
+
+			.nav_li a{ 
+				font-size:14px;
+				font-weight:bold;
+				display:block; /* 将链接设为块级元素 */
+				padding:1px 1px; /* 设置内边距 */
+				background:#85c80f; /* 设置背景色 */
+				color:#fff; /* 设置文字颜色 */
+				text-decoration:none; /* 去掉下划线 */
+				border-right:1px solid #fff; /* 在左侧加上分隔线 */
+			}
+
+			.nav_li ul li:hover{ 
+				background:rgb(83,83,83);
+			}
+
+			.nav_li ul li ul li{
+				background:rgb(164,0,0);
+				color: #FFF; 
+				width: 50px;
+				padding: 0px;
+				height: 20px; 
+				line-height: 20px;
+			}
+
+		</style>
+	</head>
+
+	<body topmargin=2 leftmargin=2 bgcolor=#ffffff>
+
+	<div class="get">
+	  <div >
+	    <div >
+	      <h1 class="get-title">我在长大</h1>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="nav" align="center"  >
+	    <div class="nav_li" align="center" >
+	      <ul>
+	        <li><a href="/">开始记录</a></li>
+	        <li><a href="history.html">查看历史</a></li>
+	        <li><a href="baby.html">宝宝信息</a></li>
+	        <li><a href="email.html">发送邮箱</a></li>
+	        <li><a href="camera.html">宝宝拍照</a></li>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+    <div >{{tips}} </div>
+    </br>
+
+	<form action="/index.html" method="POST">
+		<div class="labeltitle">
+		请记录宝宝今天的表现吧:
+        </div>
+		</br>    
+		<div align="center" style="width:100%;padding:30px;padding-bottom:80px;">
+		    <textarea name="newline" rows="6" cols="50" style="width:80%;float:left;"/>开始记录宝宝表现……</textarea>	    	
+	    </div>
+	    </br>
+		<div align="left" style="padding:30px;">
+		    <input value="保存" type="submit" style="width:20%;padding:5px;padding-bottom:10px;float:left;"/>
+		</div>
+    </form>		
+
+	</body>
+</html>
