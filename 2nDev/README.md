@@ -3,4 +3,7 @@
 
 ## 进展
 
-- 150924 大妈创建
+* [输出宝宝记录](noterecordinput.md)
+* [宝宝信息采录](notebabyinput.md)
+* [发送邮箱](notesendmail.md)
+* [给宝宝拍照](notetakephoto.md)
