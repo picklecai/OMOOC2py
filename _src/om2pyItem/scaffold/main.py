@@ -200,7 +200,7 @@ def sendmail():
         msg['Subject'] = Header(u'您的宝宝记录……', 'utf-8').encode()
         msg.attach(MIMEText('附件是您宝宝的日常记录，请查收。祝您生活愉快！宝宝健康快乐！', 'plain', 'utf-8'))
         with open(historyrecord, 'rb') as f:
-            mime = MIMEBase('database', 'xls', filename='noterecord.xls')
+            mime = MIMEBase('database', 'db', filename='noterecord.db')
             mime.add_header('Content-Disposition', 'attachment', filename='noterecord.db')
             mime.add_header('Content-ID', '<0>')
             mime.add_header('X-Attachment-Id', '0')
