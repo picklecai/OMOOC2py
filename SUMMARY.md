@@ -35,6 +35,7 @@
        * [Template](1sTry/template.md)  
        * [sqlite](1sTry/sqlite.md)
 * [迭代作品](2nDev/README.md)
+       * [项目简介](2nDev/lixiang.md)
        * [输出宝宝记录](2nDev/noterecordinput.md)
        * [宝宝信息采录](2nDev/notebabyinput.md)
        * [发送邮箱](2nDev/notesendmail.md)
