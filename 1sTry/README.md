@@ -17,3 +17,4 @@
     * [Fabric](fabric.md)
     * [Template](template.md)
     * [sqlite](sqlite.md)
+    * [BeautifulSoup](beautifulsoup.md)

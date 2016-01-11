@@ -34,6 +34,7 @@
        * [Fabric](1sTry/fabric.md)
        * [Template](1sTry/template.md)  
        * [sqlite](1sTry/sqlite.md)
+       * [BeautifulSoup](1sTry/beautifulsoup.md)
 * [迭代作品](2nDev/README.md)
    * [项目简介](2nDev/lixiang.md)
    * [输出宝宝记录](2nDev/noterecordinput.md)
