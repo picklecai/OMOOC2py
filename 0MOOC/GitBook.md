@@ -21,6 +21,8 @@ Github帐号已经与Gitbook帐号关联。
 6. 注意！每一步更改都记得点击绿色的Save按钮进行保存。没有保存的话，离开当前页面不会有系统提示。  
 7. 最后还可能会让你添加webhook。点击add webhook，则进入github菜单，地址已有，只要点击Add webhook即可。  
 
+注意，如果github中的仓库是私有仓库（private），则在最后一步设置webhook时，需要更改gitbook的权限为同时允许私有和公共，否则找不到目录（因默认为只允许公共public），无法读取到webhook，就联动不了了。
+
 附book.json代码：
 
     {

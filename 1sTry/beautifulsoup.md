@@ -9,3 +9,6 @@
 2 ： easy_install beautifulsoup4  
 3 ： pip install beautifulsoup4  
 4 ：源码安装： python setup.py install  
+
+成功截图：  
+![](http://7xotr7.com1.z0.glb.clouddn.com/16-1-12/49387150.jpg)
