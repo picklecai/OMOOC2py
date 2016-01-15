@@ -162,3 +162,30 @@ if判断中，起初写的“=”，结果就只能执行一次，后面就无�
 完美实现！ XD  
 
 回想一下，就应该直接用参数控制。因为使用形参不熟练，所以绕了一大圈，又回到这里来了。  
+
+### 7. 元素右对齐  
+
+欲实现效果：  
+
+![](http://7xotr7.com1.z0.glb.clouddn.com/16-1-15/34436290.jpg)  
+
+原先三个元素时，用margin-left=62.5%，增加了第四个元素，这个数值就不够了。需要自动右对齐。  
+
+现在代码：  
+
+    	<div class="headerright">
+			<span style="float:right"><a href="/github/babyrecord/templates/takephoto.html"><img src="/github/babyrecord/assets/images/camera.png" width="30" height="30"/></a></span>
+			<span style="float:right"><a href="/github/babyrecord/templates/sendmail.html"><img src="/github/babyrecord/assets/images/mail.png" width="30" height="30"/></a></span>
+			<span style="float:right" style="float:right"><img src="/github/babyrecord/assets/images/search.png" width="30" height="30" onclick="showandhidden(searchbar);" /></span>
+			<span style="float:right"><a href="/github/babyrecord/templates/add.html"><img src="/github/babyrecord/assets/images/add.png" width="30" height="30"/></a></span>	
+		</div>	
+    ……
+    ……
+    .headerright
+	{
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		text-align:right;
+	}  
+
