@@ -118,4 +118,47 @@ if判断中，起初写的“=”，结果就只能执行一次，后面就无�
 
 但是：当增加了宝宝信息后，菜单变长了。这些元素列表再下移，就不好看了。  
 
-所以这是临时解决方案，还是要找到覆盖列表的方法。  
+所以这是临时解决方案，还是要找到覆盖列表的方法。   
+
+### 6. div显示与隐藏功能的复用  
+
+在原来的脚本中，showandhidden函数，在另一个地方想再实现这个功能——例如右边的搜索框，点击放大镜图片，显示搜索框，再点击隐藏——就需要再抄一遍代码，另外给div1赋值。感觉这个重复劳动可以省去。  
+
+起先试图类，搜索了一下，[Javascript定义类（class）的三种方法 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html)，阮一峰说这个本来是不支持类的，只能模拟。支持类的我也还闹不清楚。放弃。  
+
+中间试着给function加参数，加了两个参数，divcontrol和div1。然后发现divcontrol，其他人是在另一个函数来定义的，效果是让html中少写一个onclick。[javascript如何实现点击切换div的显示和隐藏-蚂蚁部落](http://www.softwhy.com/forum.php?mod=viewthread&tid=7957) 根据这里用的window.onload思索，估计也就只能一次性用用。  
+
+接着把divcontrol去掉，仍然在html中加上onclick动作。  
+
+突然发现：有了参数div1之后，它不会在我未赋值时说div1未赋值了。于是改成这样：  
+
+    <script type="text/javascript">
+		function showandhidden(div1){
+			if(div1.style.visibility=='hidden')
+				{
+					div1.style.visibility='';
+				}
+			else
+				{
+					div1.style.visibility='hidden';
+				} 
+			}
+	</script> 
+
+最简方法函数了。  
+
+在html中：  
+
+    <div class="headerleft" onclick="showandhidden(babymenu)";>  
+
+注意不能在babymenu上加引号。  
+
+运行成功。  
+
+于是在搜索按钮上照旧：  
+
+    <img src="/assets/images/search.png" width="30" height="30" onclick="showandhidden(searchbar);" />  
+
+完美实现！ XD  
+
+回想一下，就应该直接用参数控制。因为使用形参不熟练，所以绕了一大圈，又回到这里来了。  
