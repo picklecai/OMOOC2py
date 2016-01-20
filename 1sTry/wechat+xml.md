@@ -17,8 +17,6 @@
 1.3 接受普通消息  
 文本消息  
 
-<pre><code>  
-
     <xml>
     <ToUserName><![CDATA[toUser]]></ToUserName>
     <FromUserName><![CDATA[fromUser]]></FromUserName> 
@@ -27,8 +25,6 @@
     <Content><![CDATA[this is a test]]></Content>
     <MsgId>1234567890123456</MsgId>
     </xml>  
-
-</pre></code>
 
 凑巧又看见时间戳。  
 

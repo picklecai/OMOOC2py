@@ -7,7 +7,19 @@ win8
 ## 安装
 
 下载bottle.py，放在工作目录下。  
-[下载地址](https://pypi.python.org/pypi/bottle/0.12.9)  
+[下载地址](https://pypi.python.org/pypi/bottle/0.12.9)   
+
+还是安装好。再配上安装命令：  
+
+    pip install bottle # 这是我们最推荐的安装方式
+或者：
+
+    easy_install bottle # 如果没有pip,可用这个方式  
+
+成功截图：  
+![](http://7xotr7.com1.z0.glb.clouddn.com/16-1-20/55846856.jpg)  
+
+推荐网页（[Bottle文档最新翻译版-1.1.1安装Bottle框架 - 铂金小马的个人空间 - 开源中国社区](http://my.oschina.net/lesslove/blog/96185)）会提到sudo，在windows下不能用，用了要出错。
 
 ## 配置
 
