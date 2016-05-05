@@ -41,6 +41,8 @@ mac下使用了3103版本，找到[这里](http://9iphp.com/web/html/sublime-tex
 
 菜单变成了`remove licence`，应该是成功了。
 
+## 配置
+
 ### 4. octave文件语法高亮
 在[这里](http://blog.sina.com.cn/s/blog_71e26e290102v3ad.html)看到配置：  
 
@@ -65,7 +67,16 @@ mac下使用了3103版本，找到[这里](http://9iphp.com/web/html/sublime-tex
 	[path: /usr/bin:/bin:/usr/sbin:/sbin]
 	[Finished]
 
-## 配置
+发现菜单：`view-syntax-matlab`  
+点选，没反应。  
+
+过了些时，sublime关掉了（嗯， 其实我好几个月都没有关sublime），重新打开程序时，又想起了去点击了上面这个菜单。界面瞬间变了：所有注释都是灰色。   
+
+哦也～～～  上次没成功只是因为我没有重新启动程序。  
+
+（copyright：3103）  
+
+野教程害人不浅。
 
 ## 使用
 
