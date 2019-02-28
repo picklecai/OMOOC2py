@@ -24,3 +24,22 @@ pip3 install --upgrade pip
 
 所以用pip3安装，是没法关联到ipython中去的。conda可以安装吗？？？
 
+```
+conda install lxml
+conda install beautifulsoup4
+conda install requests
+``` 
+安装成功。
+
+打开ipython notebook试，在py3下，一个都不能import，在py2下，除了beautifulsoup4之外的其他两个可以import。查看了`conda list`，三个包都显示在py2.7下。
+
+如果在终端直接进入ipython，由于调用了py2的内核，效果和notebook中新建一个py2是一样的，即除了beautifulsoup4外的其他两个可以import。
+
+重新使用激活py3的命令：`source activate python35`，然后`conda install requests`，py3下成功import了。`conda install lxml`也成功了。但是`conda install beautifulsoup4`照旧，安装成功了，不能import。
+
+发现问题出在如何引用库上：`from bs4 import BeautifulSoup`  
+人家B和S是大写的。python是大小写敏感的！！！以及要从bs4中去import。回到py2下，也成功了。
+
+所以意思是以后想要在ipython中同时使用py2和py3，每个库都要在两种状态下各安装一遍？
+
+
