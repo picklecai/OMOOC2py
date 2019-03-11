@@ -42,4 +42,12 @@ conda install requests
 
 所以意思是以后想要在ipython中同时使用py2和py3，每个库都要在两种状态下各安装一遍？
 
+## 安装pyperclip
+
+使用上面的方法，安装`pyperclip`库。先激活python35,再用conda命令。超时失败，anaconda中没有。回到python2也是没有。  
+
+按照[python - 怎样安装第三方包到Anaconda环境？ - SegmentFault 思否](https://segmentfault.com/q/1010000012539647)的提示，目录切换到/bin/（由于操作失误，是在/caimeijuan下直接cd /bin的），再使用`pip`和`pip3`各安装一遍。回到ipython中，py2文件可以导入，py3文件不能。
+
+用`source activate python35`激活python3,照上操作，目录进入bin，用pip3安装，ipython中py3文件可以导入了。
+
 

@@ -37,6 +37,8 @@ conda deactivate python35
 
 激活后升级，可升级对应到版本。例如，在python3被激活的情况下升级python，会由python3.5升级到python3.7。python2同理。
 
+后来发现，`conda deactivate python35`这句话没有用。但是关了终端再重新打开，就回到python2了。
+
 ## 2. 在ipython中切换python2和python3  
 
 发现以上操作只是在anaconda中管理两个版本，并没有在ipython中切换。
