@@ -50,4 +50,9 @@ conda install requests
 
 用`source activate python35`激活python3,照上操作，目录进入bin，用pip3安装，ipython中py3文件可以导入了。
 
+## 在ipython中使用终端命令
+
+加个!就可以了。
+例如，Mac中清除剪切板的命令是`pbcopy < /dev/null`，在ipython notebook中输入`!pbcopy < /dev/null`就可以清空剪切板了。
+
 
