@@ -55,4 +55,53 @@ conda install requests
 加个!就可以了。
 例如，Mac中清除剪切板的命令是`pbcopy < /dev/null`，在ipython notebook中输入`!pbcopy < /dev/null`就可以清空剪切板了。
 
+## 安装numpy和matplotlib
+
+用	`source activate python35`进入py3，numpy是成功的。
+`conda install matplotlib`未成功。还让我手动删掉一个/anaconda/envs/python35/lib/python3.7/site-packages/tornado下的__init__.py文件，删了以后也还是不行。  
+于是改用`pip install matplotlib`，貌似成了。
+
+想多了，import matplotlib的结果是：
+
+```
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-7-0484cd13f94d> in <module>
+----> 1 import matplotlib
+
+~/anaconda/envs/python35/lib/python3.7/site-packages/matplotlib/__init__.py in <module>
+    208 
+    209 
+--> 210 if not compare_versions(numpy.__version__, __version__numpy__):
+    211     raise ImportError(
+    212         "Matplotlib requires numpy>=%s; you have %s" % (
+
+AttributeError: module 'numpy' has no attribute '__version__'
+
+```
+
+感觉意思是numpy要升级。上次怎么装上的也忘了。使用`pip install --upgrade numpy`升级，但是提示为已经是新版本了：`Requirement already up-to-date: numpy in ./anaconda/envs/python35/lib/python3.7/site-packages (1.16.2)`
+
+那就update刚刚装的matplotlib吧。  
+`pip install --upgrade matplotlib`  
+结果似乎倒苦水了：  
+```
+Requirement already up-to-date: matplotlib in ./anaconda/envs/python35/lib/python3.7/site-packages (3.0.3)
+Requirement already satisfied, skipping upgrade: numpy>=1.10.0 in ./anaconda/envs/python35/lib/python3.7/site-packages (from matplotlib) (1.16.2)
+Requirement already satisfied, skipping upgrade: kiwisolver>=1.0.1 in ./anaconda/envs/python35/lib/python3.7/site-packages (from matplotlib) (1.0.1)
+Requirement already satisfied, skipping upgrade: python-dateutil>=2.1 in ./anaconda/envs/python35/lib/python3.7/site-packages (from matplotlib) (2.8.0)
+Requirement already satisfied, skipping upgrade: cycler>=0.10 in ./anaconda/envs/python35/lib/python3.7/site-packages (from matplotlib) (0.10.0)
+Requirement already satisfied, skipping upgrade: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in ./anaconda/envs/python35/lib/python3.7/site-packages (from matplotlib) (2.3.1)
+Requirement already satisfied, skipping upgrade: setuptools in ./anaconda/envs/python35/lib/python3.7/site-packages (from kiwisolver>=1.0.1->matplotlib) (40.8.0)
+Requirement already satisfied, skipping upgrade: six>=1.5 in ./anaconda/envs/python35/lib/python3.7/site-packages (from python-dateutil>=2.1->matplotlib) (1.12.0)
+```
+
+看有个人是卸载再重装numpy的，于是：
+`pip uninstall numpy`
+然后：
+`pip install -U numpy`
+没有反应。
+重启电脑，成了！！！！
+
+
 
