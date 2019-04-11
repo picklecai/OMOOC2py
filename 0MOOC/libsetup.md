@@ -103,5 +103,15 @@ Requirement already satisfied, skipping upgrade: six>=1.5 in ./anaconda/envs/pyt
 没有反应。
 重启电脑，成了！！！！
 
+## 安装builtwith、python-whois、selenium
+
+用`source activate python35`进入python3，`pip3 install builtwith`，`pip3 install python-whois`，`pip3 install selenium`几秒钟就装好了。 
+
+selenium有点麻烦。虽然装好了，但是不能使用chrome。需要下载Chromedriver，放到环境变量中去。
+
+查看selenium版本号： `pip3 list selenium`
+
+
+
 
 
