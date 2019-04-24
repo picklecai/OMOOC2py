@@ -111,6 +111,62 @@ selenium有点麻烦。虽然装好了，但是不能使用chrome。需要下载
 
 查看selenium版本号： `pip3 list selenium`
 
+## 安装openpyxl、pillow  
+
+用`source activate python35`进入python3，`conda install openpyxl`，`conda install pillow`，很快就装好了，可以用了。
+
+## 安装PyPDF2
+
+用`source activate python35`进入python3，不能用conda，必须用pip3安装。  
+
+` pip3 install PyPDF2`
+
+
+## 安装mounty  
+
+[mac OSError: [Errno 30] Read-only file system: 'complete_data.txt' - 你的朋友不及格，你很难过；你的朋友考了第一，你更难过。 - CSDN博客](https://blog.csdn.net/w5688414/article/details/79248777)
+
+```
+---------------------------------------------------------------------------
+OSError                                   Traceback (most recent call last)
+<ipython-input-11-7743c951bce7> in <module>
+     40 for file in dupFiles:
+     41     if os.path.exists(file):
+---> 42         os.remove(file)
+     43     else:
+     44         print('No such file. %s' %file)
+
+OSError: [Errno 30] Read-only file system: '古典丨李海峰：凡事必有4种解决方案.mp3'
+
+```
+安装命令为：
+
+`brew cask install mounty`
+
+安装失败，原因是：  
+`Error: Unknown command: cask`  
+
+参照：  
+[Bug report: "Error: Unknown command: cask" after #23852 · Issue #23934 · Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask/issues/23934)
+
+```
+caimeijuandeAir:local caimeijuan$ git fetch
+remote: Enumerating objects: 121631, done.
+remote: Counting objects: 100% (121631/121631), done.
+remote: Compressing objects: 100% (29561/29561), done.
+error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+fatal: the remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+caimeijuandeAir:local caimeijuan$ git fetch
+remote: Enumerating objects: 121641, done.
+remote: Counting objects: 100% (121641/121641), done.
+remote: Compressing objects: 100% (29567/29567), done.
+error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+fatal: the remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+caimeijuandeAir:local caimeijuan$ ```
 
 
 
